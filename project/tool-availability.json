@@ -1,0 +1,110 @@
+{
+  "tool.api.openapi.validate": {
+    "available": true,
+    "command": null
+  },
+  "tool.cache.get": {
+    "available": true,
+    "command": null
+  },
+  "tool.cache.set": {
+    "available": true,
+    "command": null
+  },
+  "tool.coverage.report": {
+    "available": true,
+    "command": null
+  },
+  "tool.db.metadata.readonly": {
+    "available": true,
+    "command": null
+  },
+  "tool.files.read": {
+    "available": true,
+    "command": null
+  },
+  "tool.files.write_dry_run": {
+    "available": true,
+    "command": null
+  },
+  "tool.index.query": {
+    "available": true,
+    "command": null
+  },
+  "tool.lint.eslint": {
+    "available": true,
+    "command": "npm"
+  },
+  "tool.lint.ruff": {
+    "available": true,
+    "command": null
+  },
+  "tool.memory.propose": {
+    "available": true,
+    "command": null
+  },
+  "tool.obs.billing": {
+    "available": true,
+    "command": null
+  },
+  "tool.ocr.screen": {
+    "available": true,
+    "command": null
+  },
+  "tool.repo.ast.parse": {
+    "available": true,
+    "command": null
+  },
+  "tool.security.gitleaks": {
+    "available": false,
+    "command": "gitleaks"
+  },
+  "tool.security.npm_audit": {
+    "available": true,
+    "command": "npm"
+  },
+  "tool.security.pip_audit": {
+    "available": true,
+    "command": null
+  },
+  "tool.security.semgrep": {
+    "available": false,
+    "command": "semgrep"
+  },
+  "tool.security.trivy": {
+    "available": false,
+    "command": "trivy"
+  },
+  "tool.sql.parse": {
+    "available": true,
+    "command": null
+  },
+  "tool.test.playwright": {
+    "available": true,
+    "command": null
+  },
+  "tool.test.pytest": {
+    "available": true,
+    "command": "pytest"
+  },
+  "tool.test.vitest": {
+    "available": true,
+    "command": "npm"
+  },
+  "tool.typecheck.pyright": {
+    "available": true,
+    "command": null
+  },
+  "tool.typecheck.tsc": {
+    "available": true,
+    "command": "npm"
+  },
+  "tool.validator.final_format": {
+    "available": true,
+    "command": null
+  },
+  "tool.validator.schema": {
+    "available": true,
+    "command": null
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "timeout_seconds": 60,
+  "max_tool_calls": 1,
+  "max_output_bytes": 65536,
+  "max_file_bytes": 10485760,
+  "memory_enabled": false,
+  "python_image": null
+}

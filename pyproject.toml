@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexonova-factory"
+version = "0.1.0"
+description = "Local, evidence-based software factory for NexoNova"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = ["Operating System :: POSIX :: Linux"]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest==9.0.3"]
+
+[project.scripts]
+nexonova-factory = "factory.cli:main"
+
+[tool.setuptools]
+packages = ["factory"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

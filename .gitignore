@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+.DS_Store
+node_modules/
+.next/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+projects/
+logs/
+# Preserve the academic snapshot on disk; it is not a new client's workspace.
+project/runs/
+project/cache/
+project/index/
+project/agent-memory/
+# Local development tools/checkpoints; never product runtime or customer state.
+.migration-tools/
+.migration-checkpoints/

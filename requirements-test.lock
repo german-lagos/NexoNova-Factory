@@ -1,0 +1,7 @@
+# Pinned development environment; runtime has no third-party dependencies.
+Pygments==2.21.0
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+pytest==9.0.3
+setuptools==80.9.0

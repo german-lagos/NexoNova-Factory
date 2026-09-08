@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-07",
+  "scope": "partial_migration",
+  "checks": [
+    {
+      "check": "full_factory_suite",
+      "command": [
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "stdout": "..........................................................               [100%]\n58 passed in 1.33s\n",
+      "stderr": ""
+    },
+    {
+      "check": "source_cli_start",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "factory.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: python3 -m factory.cli [-h]\n                              {init-project,run,verify,list,init-workspace,approve-tool,run-tool} ...\n\nNexoNova Factory \u2014 n\u00facleo local; bootstrap legado bloqueado\n\npositional arguments:\n  {init-project,run,verify,list,init-workspace,approve-tool,run-tool}\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "stderr": ""
+    },
+    {
+      "check": "structure_imports_links_and_legacy_hashes",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/validate_repository.py"
+      ],
+      "exit_code": 0,
+      "stdout": "structural_validation=complete\n",
+      "stderr": ""
+    },
+    {
+      "check": "wheel_build",
+      "command": [
+        "/usr/bin/python3",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.migration-tools/pip.pyz",
+        "--python",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.venv/bin/python",
+        "wheel",
+        "--no-deps",
+        "--no-build-isolation",
+        "--no-cache-dir",
+        "--wheel-dir",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.migration-tools/wheels",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "Processing ./.\n  Preparing metadata (pyproject.toml): started\n  Preparing metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: nexonova-factory\n  Building wheel for nexonova-factory (pyproject.toml): started\n  Building wheel for nexonova-factory (pyproject.toml): finished with status 'done'\n  Created wheel for nexonova-factory: filename=nexonova_factory-0.1.0-py3-none-any.whl size=41560 sha256=ff3c80d5d3678f103d6b2a41a6241f67aa96d25503adbb6e61a9da0acd7190de\n  Stored in directory: /tmp/pip-ephem-wheel-cache-md9qzg66/wheels/82/25/bb/27d4340dbd8cf899c01e0895a5640866a88bdb81a6a5a3bd3b\nSuccessfully built nexonova-factory\n",
+      "stderr": ""
+    },
+    {
+      "check": "isolated_wheel_install",
+      "command": [
+        "/usr/bin/python3",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.migration-tools/pip.pyz",
+        "--python",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.venv/bin/python",
+        "install",
+        "--no-deps",
+        "--no-index",
+        "--target",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.migration-tools/installed-20260907",
+        "/home/germanleiks/NexoNova/NEXONOVA FACTORY v1.0/.migration-tools/wheels/nexonova_factory-0.1.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "stdout": "Processing ./.migration-tools/wheels/nexonova_factory-0.1.0-py3-none-any.whl\nInstalling collected packages: nexonova-factory\nSuccessfully installed nexonova-factory-0.1.0\n",
+      "stderr": "WARNING: The directory '/home/germanleiks/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n"
+    },
+    {
+      "check": "installed_cli_start",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "factory.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: python3 -m factory.cli [-h]\n                              {init-project,run,verify,list,init-workspace,approve-tool,run-tool} ...\n\nNexoNova Factory \u2014 n\u00facleo local; bootstrap legado bloqueado\n\npositional arguments:\n  {init-project,run,verify,list,init-workspace,approve-tool,run-tool}\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "stderr": ""
+    },
+    {
+      "check": "installed_workspace_initialization",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "factory.cli",
+        "init-workspace",
+        "--root",
+        "/tmp/nexonova-cli-check-ie_xsyzi/private",
+        "--client",
+        "demo",
+        "--project-id",
+        "piloto"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "workspace=/tmp/nexonova-cli-check-ie_xsyzi/private/demo/piloto/workspace\n",
+      "stderr": ""
+    },
+    {
+      "check": "installed_tool_preview",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "factory.cli",
+        "run-tool",
+        "--root",
+        "/tmp/nexonova-cli-check-ie_xsyzi/private",
+        "--client",
+        "demo",
+        "--project-id",
+        "piloto",
+        "--tool",
+        "python.unittest",
+        "--dry-run"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout": "{\"format\": \"nexonova.tool-result.v1\", \"tool_id\": \"python.unittest\", \"run_id\": \"RUN-b8384399c7724f92ba0d4aa4cadab53f\", \"started_at\": \"2026-09-08T02:18:15+00:00\", \"status\": \"needs_user_input\", \"executed\": false, \"exit_code\": null, \"tests_run\": null, \"output\": \"\", \"reason\": \"Preview only; no process or approval consumed\", \"image\": null, \"sandbox\": \"docker-local-readonly-no-network\", \"source_hash\": \"sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\", \"model_usage\": \"not_applicable\", \"human_review\": \"pending\", \"finished_at\": \"2026-09-08T02:18:15+00:00\"}\n",
+      "stderr": ""
+    },
+    {
+      "check": "installed_missing_backend_blocks",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "factory.cli",
+        "run-tool",
+        "--root",
+        "/tmp/nexonova-cli-check-ie_xsyzi/private",
+        "--client",
+        "demo",
+        "--project-id",
+        "piloto",
+        "--tool",
+        "python.unittest"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stdout": "{\"format\": \"nexonova.tool-result.v1\", \"tool_id\": \"python.unittest\", \"run_id\": \"RUN-0d5e436cce2642a1acbb43ed41ac9163\", \"started_at\": \"2026-09-08T02:18:15+00:00\", \"status\": \"not_answerable\", \"executed\": false, \"exit_code\": null, \"tests_run\": null, \"output\": \"\", \"reason\": \"Local Docker and an approved pinned Python image are required\", \"image\": null, \"sandbox\": \"docker-local-readonly-no-network\", \"source_hash\": \"sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\", \"model_usage\": \"not_applicable\", \"human_review\": \"pending\", \"finished_at\": \"2026-09-08T02:18:15+00:00\"}\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -2,14 +2,14 @@
 
 Núcleo local en Python para evolucionar hacia una fábrica de software de NexoNova. **Estado actual: migración parcial y experimental. No genera todavía aplicaciones web ni está aprobado para producción.**
 
-P0 estableció la línea base y P1 eliminó la aceptación del bootstrap documental como trabajo real. P2 incorpora almacenamiento privado y un adaptador validado con Docker real: PASS_WITH_LIMITATIONS aprobado por el usuario. P3.1 y P3.2 incorporan entradas preservadas y contratos versionados; esperan revisión antes de P3.3. Consulte [el informe de cambios](REFACTOR_REPORT.md) y [el estado de las fases](docs/migration/README.md).
+P0 estableció la línea base y P1 eliminó la aceptación del bootstrap documental como trabajo real. P2 incorpora almacenamiento privado y un adaptador validado con Docker real: PASS_WITH_LIMITATIONS aprobado por el usuario. P3.1 y P3.2 incorporan entradas preservadas y contratos versionados; aprobados por el usuario; la base visual P3.3 está implementada para revisión. Consulte [el informe de cambios](REFACTOR_REPORT.md) y [el estado de las fases](docs/migration/README.md).
 
 ## Requisitos
 
 - Linux y Python 3.11 o superior; esta entrega se probó con Python 3.14.4. El lock usa flock y el adaptador asume un socket Docker local de Linux.
 - Runtime sin dependencias Python externas. pytest se usa solo para desarrollo; setuptools es el backend de empaquetado.
 - Docker local e imagen oficial Python fijada por digest **solo para el adaptador experimental de procesos**. La imagen no se descarga automáticamente. No se implementa un fallback de ejecución en host.
-- Los productos futuros seguirán el stack de [AGENTS.md](AGENTS.md). No se han creado templates Next.js, autenticación, BD ni infraestructura de clientes en esta entrega.
+- Los productos futuros seguirán el stack de [AGENTS.md](AGENTS.md). La base corporate-site usa Next.js; no incorpora autenticación, BD ni infraestructura de clientes.
 
 ## Desarrollo y pruebas
 
@@ -49,7 +49,7 @@ Los comandos `run` e `init-project` permanecen como compatibilidad diagnóstica.
 ## Responsabilidades
 
 - `factory/`: CLI, orquestador, contratos, políticas, validación, contexto, estado y executor.
-- `config/factory.json`: configuración explícita sin secretos; memoria desactivada y sin imagen de ejecución preaprobada.
+- `config/factory.json`: configuración explícita sin secretos; memoria desactivada e imagen Docker experimental fijada por digest.
 - `tests/`: regresiones del núcleo, evidencia y fronteras de almacenamiento/ejecución.
 - `docs/migration/`: decisiones, resultados y bloqueos por fase.
 - `project/`: snapshot académico preservado; no utilizarlo para nuevos clientes.
@@ -58,11 +58,11 @@ No se movieron ni eliminaron archivos legados. La ausencia de historial Git est�
 
 ## Próximo paso
 
-Revisar P3.1 y P3.2, resolver el material pendiente y autorizar explícitamente P3.3 antes de implementar generación. Las fases posteriores permanecen fuera del alcance actual. No se han realizado despliegues, cambios de servicios externos ni migraciones de datos.
+Revisar la base visual P3.3 antes de autorizar P3.4. Las fases posteriores permanecen fuera del alcance actual. No se han realizado despliegues, cambios de servicios externos ni migraciones de datos.
 
 ## Preparación P3: entradas y contratos
 
-La fábrica reside en nexonova-factory y la fuente preservada en la carpeta hermana nexonova-prototype. El registro config/sources.json usa rutas relativas al checkout. P2 está aprobado; P3.1/P3.2 están preparadas para revisión. Todavía no existe nexonova-website ni se inicia P3.3.
+La fábrica reside en nexonova-factory y la fuente preservada en la carpeta hermana nexonova-prototype. El registro config/sources.json usa rutas relativas al checkout. P2 está aprobado; P3.1/P3.2 están aprobadas y P3.3 incorpora templates/corporate-site. Todavía no existe nexonova-website ni se inicia P3.4.
 
 Validar sin ejecutar el prototipo:
 
@@ -72,3 +72,5 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate_product_inputs.py --
 ```
 
 Añadir --require-ready exige que el material esté aprobado: actualmente devuelve código 2 por decisiones pendientes. Detalles y archivos en [P3](docs/migration/P3.md). Abrir la nueva carpeta en el IDE; no existe alias operativo con el nombre anterior.
+
+Base visual, instrucciones y límites: [P3.3](docs/migration/P3_3.md) y [README del template](templates/corporate-site/README.md).

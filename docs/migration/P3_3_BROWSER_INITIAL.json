@@ -1,0 +1,22 @@
+[
+  {
+    "pilot": "synthetic",
+    "command": [
+      "npm",
+      "run",
+      "test:browser"
+    ],
+    "exit_code": 1,
+    "output": "\n> corporate-site-base@0.1.0 test:browser\n> playwright test\n\n\nTypeError: Module \"file:///var/tmp/nexonova-p33-validation/synthetic/src/content/site.json\" needs an import attribute of \"type: json\"\n\nError: No tests found\n\n\n"
+  },
+  {
+    "pilot": "nexonova",
+    "command": [
+      "npm",
+      "run",
+      "test:browser"
+    ],
+    "exit_code": 1,
+    "output": "\n> corporate-site-base@0.1.0 test:browser\n> playwright test\n\n\nTypeError: Module \"file:///var/tmp/nexonova-p33-validation/nexonova/src/content/site.json\" needs an import attribute of \"type: json\"\n\nError: No tests found\n\n\n"
+  }
+]

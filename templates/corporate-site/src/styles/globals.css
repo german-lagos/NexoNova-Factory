@@ -1,0 +1,13 @@
+* { box-sizing: border-box; }
+html { color-scheme: light; scroll-behavior: smooth; scroll-padding-top: 100px; }
+body { margin: 0; font-family: var(--font-sans); line-height: 1.6; color: var(--ink); background: var(--white); }
+h1, h2, h3, p { margin-top: 0; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.15; letter-spacing: -.025em; }
+h3 { font-size: 1.5rem; line-height: 1.2; }
+a { color: inherit; text-underline-offset: .25em; }
+button, input, textarea { font: inherit; }
+input { min-width: 0; }
+a, button, summary { touch-action: manipulation; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+button:disabled, input:disabled { cursor: not-allowed; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

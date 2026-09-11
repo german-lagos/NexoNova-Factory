@@ -1,0 +1,118 @@
+{
+  "format": "nexonova.visual-selection.v1",
+  "phase": "P3.3",
+  "authorization": "User explicitly approved P3.1/P3.2 and visual base P3.3 in this conversation; not P3.4 or deployment.",
+  "source_tree_hash": "sha256:23a023c684d919d0c33ce6af34401136673ba32afd89a435c775db054cfe222c",
+  "selected_binary_assets": [],
+  "review_assets": [
+    ".gitignore",
+    "IMG_1290.HEIC",
+    "design/propuestas/calidad-v2/LEEME.md",
+    "design/propuestas/calidad-v2/dominio-v2.png",
+    "design/propuestas/calidad-v2/propiedad-v2.png",
+    "design/propuestas/calidad-v2/responsive-v2.png",
+    "public/assets/IMG_1290.jpg",
+    "public/assets/bandera-chile.jpg",
+    "public/assets/brand/icon-domain-v2.png",
+    "public/assets/brand/icon-domain.jpg",
+    "public/assets/brand/icon-ownership-v2.png",
+    "public/assets/brand/icon-ownership.jpg",
+    "public/assets/brand/icon-responsive-v2.png",
+    "public/assets/brand/icon-responsive.jpg",
+    "public/assets/brand/icon-speed.jpg",
+    "public/assets/brand/icon.png",
+    "public/assets/brand/logo-footer-subtitle.png",
+    "public/assets/brand/logo-footer.png",
+    "public/assets/brand/logo-header.jpeg",
+    "public/assets/brand/logo-hero-subtitle.png",
+    "public/assets/brand/logo-url.png",
+    "public/assets/brand/process-icons-set.jpg",
+    "public/assets/brand/quality-icons-set.jpg",
+    "public/assets/brand/social.jpeg",
+    "public/assets/chile-map.png",
+    "public/assets/chile-map.svg",
+    "public/assets/datacenter-corp.jpg",
+    "public/assets/hero-afro-entrepreneur-v1.png",
+    "public/assets/hero-barrio-pyme-oleo-v2.png",
+    "public/assets/hero-cities/coquimbo-1920.webp",
+    "public/assets/hero-cities/coquimbo-3840.webp",
+    "public/assets/hero-cities/coquimbo.jpg",
+    "public/assets/hero-cities/creditos.html",
+    "public/assets/hero-cities/los-angeles-1920.webp",
+    "public/assets/hero-cities/los-angeles-3840.webp",
+    "public/assets/hero-cities/los-angeles.jpg",
+    "public/assets/hero-cities/temuco-1920.webp",
+    "public/assets/hero-cities/temuco-3840.webp",
+    "public/assets/hero-cities/temuco.jpg",
+    "public/assets/hero-devices-desktop-poster-v1.jpg",
+    "public/assets/hero-devices-mobile-poster-v1.jpg",
+    "public/assets/hero-entrada-pyme-v3.png",
+    "public/assets/hero-mockup-macbook-poster-v1.jpg",
+    "public/assets/hero-mockup-mobile-poster-v1.jpg",
+    "public/assets/hero-office-pyme-v1.png",
+    "public/assets/hero-pyme-ssl-v1.png",
+    "public/assets/hero-pymes-nexonova-v4.png",
+    "public/assets/illust-domain-search.jpg",
+    "public/assets/illust-growth-support.jpg",
+    "public/assets/illust-pyme-store.jpg",
+    "public/assets/loader-macbook-front-v1.png",
+    "public/assets/loader-macbook-open-v1.png",
+    "public/assets/loader-phone-angle-v1.png",
+    "public/assets/loader-phone-front-v1.png",
+    "public/assets/nexonova-sales.jpg",
+    "public/assets/payments/mercado-pago.svg",
+    "public/assets/payments/transbank.svg",
+    "public/assets/payments/webpay.svg",
+    "public/landing.config.js"
+  ],
+  "missing_not_selected": [
+    {
+      "path": "public/service-values.css",
+      "reason": "Absent from authorized snapshot; not essential for structural visual reconstruction; no fabricated replacement."
+    },
+    {
+      "path": "public/web-development.css",
+      "reason": "Absent from authorized snapshot; not essential for structural visual reconstruction; no fabricated replacement."
+    },
+    {
+      "path": "public/assets/promo-cocker.jpg",
+      "reason": "Absent from authorized snapshot; not essential for structural visual reconstruction; no fabricated replacement."
+    },
+    {
+      "path": "public/assets/rocket-editorial-v3.png",
+      "reason": "Absent from authorized snapshot; not essential for structural visual reconstruction; no fabricated replacement."
+    },
+    {
+      "path": "public/assets/contact-specialist-v1.png",
+      "reason": "Absent from authorized snapshot; not essential for structural visual reconstruction; no fabricated replacement."
+    }
+  ],
+  "font": {
+    "reference": "Inter",
+    "reference_approved": true,
+    "local_material": "pending",
+    "implementation": "CSS variable with system fallback; no downloads or Google Fonts runtime"
+  },
+  "content": "Structural content approved for internal pilot; all specific commercial values remain provisional; unsubstantiated testimonials, territorial presence, metrics and guarantees excluded.",
+  "reference_only": [
+    "public/index.html",
+    "public/landing.css",
+    "public/bento-services.css",
+    "public/pricing-agentcard.css",
+    "public/contact-banner.css"
+  ],
+  "not_authorized": [
+    "P3.4",
+    "product generation",
+    "external services",
+    "deployment"
+  ],
+  "runtime_content": "visual-content.json",
+  "pending": [
+    "Logo/image provenance and specific internal-use authorization",
+    "Local Inter material and license",
+    "Human visual review with omitted assets",
+    "Definitive commercial copy before publication"
+  ],
+  "preparation_contracts": "P3.2 frozen contracts unchanged; their full material-readiness gate still blocks. This decision authorizes a visual base without pending material, not a release or executor approval."
+}

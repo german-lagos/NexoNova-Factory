@@ -382,5 +382,101 @@
     "reason": "recovered_abandoned_run",
     "exit_code": null,
     "cleanup": "absent"
+  },
+  {
+    "scenario": "isolation-success",
+    "container": "nexonova-test-202b6536baf04d6fb94ccb4307171150",
+    "status": "complete",
+    "reason": "",
+    "exit_code": 0,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "failure",
+    "container": "nexonova-test-9a57a83adcbf4fe19a7c1440c9f8c331",
+    "status": "error",
+    "reason": "Process failed, tool unavailable, or no successful test execution was reported",
+    "exit_code": 1,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "timeout",
+    "container": "nexonova-test-cddd30fe0f0f4c9cb2eefd3865425f01",
+    "status": "error",
+    "reason": "timeout",
+    "exit_code": -9,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "output_limit",
+    "container": "nexonova-test-2fdf18a00d27475192982e2d57c0256d",
+    "status": "error",
+    "reason": "output_limit",
+    "exit_code": -9,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "sigint",
+    "container": "nexonova-test-cc17ea620e554de3938ad6a33af80af6",
+    "status": "error",
+    "reason": "interrupted",
+    "exit_code": -9,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "crash-manual-cleanup",
+    "container": "nexonova-test-e31d3edd8ad1437390d5c0d4663bf69e",
+    "status": "error",
+    "reason": "recovered_abandoned_run",
+    "exit_code": null,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "isolation-success",
+    "container": "nexonova-test-76aa879a29ae44d19f6e5842c1a5ec76",
+    "status": "complete",
+    "reason": "",
+    "exit_code": 0,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "failure",
+    "container": "nexonova-test-1a5523b72ea143e8b7496b94ba2ea4b4",
+    "status": "error",
+    "reason": "Process failed, tool unavailable, or no successful test execution was reported",
+    "exit_code": 1,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "timeout",
+    "container": "nexonova-test-185b4a7586354797aa1bc63a2351c1ac",
+    "status": "error",
+    "reason": "timeout",
+    "exit_code": -9,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "output_limit",
+    "container": "nexonova-test-217c01bc38ce4286a3691f897e9d26e4",
+    "status": "error",
+    "reason": "output_limit",
+    "exit_code": 0,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "sigint",
+    "container": "nexonova-test-8fa057c8665b4413813b73690c229cae",
+    "status": "error",
+    "reason": "interrupted",
+    "exit_code": -9,
+    "cleanup": "absent"
+  },
+  {
+    "scenario": "crash-manual-cleanup",
+    "container": "nexonova-test-3149de4e154e4c048f6f619bc3583484",
+    "status": "error",
+    "reason": "recovered_abandoned_run",
+    "exit_code": null,
+    "cleanup": "absent"
   }
 ]

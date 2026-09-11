@@ -1,0 +1,11 @@
+{
+  "command": ".venv/bin/python -m pytest -q -p no:cacheprovider --tb=short",
+  "environment": {
+    "NEXONOVA_TEST_DOCKER": "1",
+    "TMPDIR": "default /tmp"
+  },
+  "result": "1 failed, 135 passed in 17.86s",
+  "test": "tests/test_p2_docker.py::test_paths_rejected_before_container[absolute]",
+  "error": "OSError: [Errno 122] Disk quota exceeded while atomic_write flushed approval metadata",
+  "evidence_kind": "summary of observed tool output; not reconstructed full stdout"
+}

@@ -1,0 +1,78 @@
+{
+  "format": "corporate-site.visual.v1",
+  "brand": {
+    "name": "NexoNova",
+    "navy": "#00143f",
+    "blue": "#075dff",
+    "cyan": "#00a4d6"
+  },
+  "hero": {
+    "title": "Tecnología para tu negocio.",
+    "accent": "Hosting y desarrollo web.",
+    "description": "Presentamos nuestros servicios para pymes y empresas. Conversemos sobre tu próximo proyecto digital."
+  },
+  "about": {
+    "title": "Tu negocio al centro. La tecnología de nuestro lado.",
+    "description": "En NexoNova queremos ayudarte a presentar tu empresa, explicar tus servicios y facilitar el contacto con tus clientes. Contenido provisional para la revisión del piloto."
+  },
+  "services": [
+    {
+      "title": "Landing page",
+      "description": "Una página para presentar tu propuesta y orientar al contacto."
+    },
+    {
+      "title": "Tienda online",
+      "description": "Una propuesta de servicio a conversar. Este piloto no incluye ventas ni pagos."
+    },
+    {
+      "title": "Soluciones a medida",
+      "description": "Cuéntanos tu idea para revisar juntos su alcance."
+    },
+    {
+      "title": "Sitio corporativo",
+      "description": "Un espacio para presentar tu empresa y sus servicios."
+    }
+  ],
+  "plans": [
+    {
+      "id": "inicio",
+      "name": "Inicio",
+      "price": "$4.990",
+      "description": "Prestaciones y periodicidad por definir."
+    },
+    {
+      "id": "pyme",
+      "name": "PYME",
+      "price": "$8.990",
+      "description": "Prestaciones y periodicidad por definir."
+    },
+    {
+      "id": "negocio",
+      "name": "Negocio",
+      "price": "$14.990",
+      "description": "Prestaciones y periodicidad por definir."
+    }
+  ],
+  "faq": [
+    {
+      "question": "¿Necesito saber de tecnología para conversar?",
+      "answer": "Puedes contarnos tu idea o necesidad. El alcance se definirá después de revisar tu consulta."
+    },
+    {
+      "question": "¿Qué pasa si ya tengo un dominio?",
+      "answer": "Puedes incluirlo al preparar tu consulta. Esta demostración no conecta ni transfiere dominios."
+    },
+    {
+      "question": "¿En cuánto tiempo estará mi sitio?",
+      "answer": "Los plazos dependen del alcance y deben acordarse. No se promete un plazo en este piloto."
+    },
+    {
+      "question": "¿Los planes son una oferta definitiva?",
+      "answer": "No. Precios y prestaciones son demostrativos y están sujetos a revisión."
+    },
+    {
+      "question": "¿Puedo contratar desde aquí?",
+      "answer": "No. El piloto no procesa pagos, pedidos ni contratación."
+    }
+  ]
+}

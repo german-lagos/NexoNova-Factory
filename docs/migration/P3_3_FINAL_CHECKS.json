@@ -1,0 +1,73 @@
+{
+  "template_files": {
+    "templates/corporate-site/.gitignore": "b52a9b1ceec6e900e6f30cb7feca69b0bb892769e2d02bdaced1e6036b992134",
+    "templates/corporate-site/README.md": "598804dca08e82e714797541bbb2b1ce4cf2b170946fb1b2ea2707336a0daa73",
+    "templates/corporate-site/next-env.d.ts": "879741880b6ab48da99dcc06dcc674d381c9826137b0496bf7bb368f302de9fc",
+    "templates/corporate-site/next.config.ts": "35c9b37fdae875c5f1aa813091d0325855a5565246a0e33f0f09401b92f7dd5e",
+    "templates/corporate-site/package-lock.json": "5c24d272fefcc467a7a918071fda7e9bd434d1755c1bc02bc6b822789f792828",
+    "templates/corporate-site/package.json": "c59131d5b68152323058455ae93e0d1dcf30c81169049a4ea709d64d7c624b90",
+    "templates/corporate-site/playwright.config.ts": "aef5a8e70d884cbc354e172561d817e6e20775cfa7258a09aa4d995156440124",
+    "templates/corporate-site/src/app/layout.tsx": "7e823308b9648b3d95a39993d711c9591899c335755e1dc5c0170644c800f323",
+    "templates/corporate-site/src/app/page.tsx": "78b6c24cc1b7af609c676e4e8ee787664e1169a0657e11df65e59d3f56a1fe56",
+    "templates/corporate-site/src/components/CorporateSite.tsx": "ca16752dc77e3f7578bcef2fd1c5027ef37c755f807a30d046881fd2daa587da",
+    "templates/corporate-site/src/components/DemoPanels.tsx": "f7ee65acea78ddd29cd2b315159c1eca2093b7e6c77392092a91c0c10eb19582",
+    "templates/corporate-site/src/components/Navigation.tsx": "f03a1936f3ea76c4f556ec3d07999ecdb98d0ee439ca44953fe3dfea16c1d709",
+    "templates/corporate-site/src/components/Sections.tsx": "61a3e3779b85d91e1fe68e07189480dca44caf429a973f9f0c76e08d95dd1dec",
+    "templates/corporate-site/src/components/Site.module.css": "93f3cb59aabfd9dd8f83a2364e1c9775c704096fdf91b9d11c3787e0b57eb41b",
+    "templates/corporate-site/src/content/index.ts": "51a72c33d7bd8324c3dc382088d28ba68214e20203df3c994e61424fd54188c0",
+    "templates/corporate-site/src/content/site.json": "9613cf89052c5493b40108d5873e6b619123e8a84747fe4d472bacc91317e6e6",
+    "templates/corporate-site/src/content/types.ts": "701fbac97359f652d58c5073273440484025f10d496d095d94f768590dc04526",
+    "templates/corporate-site/src/styles/globals.css": "d2013254cb6b9035b38a83adf75cbaedd598deece955b0c64a2bc7ce1d78350f",
+    "templates/corporate-site/src/styles/tokens.css": "5defb59338e858de153ecb9b59de234f51b4f30d4a2ea3c0665c03d6a8e93cd8",
+    "templates/corporate-site/tests/browser/visual.spec.ts": "026e22c833aa6ff999e0c7606efa883a0b4579313895dc626be68ae7d6a9103e",
+    "templates/corporate-site/tests/content.test.mjs": "37fa2540a8fdad4832d053288c178476c3c39df92562271f0eacb2905830fb15",
+    "templates/corporate-site/tsconfig.json": "788fe1cecadd2e6f12879900b8adc6c49b8cdf30e1c78999f9d791d3e86251e5"
+  },
+  "prototype_modified": false,
+  "p3_4_started": false,
+  "product_generated": false,
+  "checks": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_repository.py"
+      ],
+      "exit_code": 0,
+      "output": "structural_validation=complete\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/nexonova"
+      ],
+      "exit_code": 0,
+      "output": "product_inputs=valid; source=verified; generation=not-authorized\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "factory.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "output": "usage: python -m factory.cli [-h]\n                             {init-project,run,verify,list,init-workspace,approve-tool,run-tool,import-legacy-reference,recover-run} ...\n\nNexoNova Factory \u2014 n\u00facleo local; bootstrap legado bloqueado\n\npositional arguments:\n  {init-project,run,verify,list,init-workspace,approve-tool,run-tool,import-legacy-reference,recover-run}\n\noptions:\n  -h, --help            show this help message and exit\n"
+    },
+    {
+      "command": [
+        "docker",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=nexonova-test-"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "preview_port_3183_listening": false
+}

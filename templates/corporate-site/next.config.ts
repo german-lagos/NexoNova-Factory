@@ -1,0 +1,7 @@
+import type { NextConfig } from "next";
+const config: NextConfig = {
+  poweredByHeader: false,
+  images: { unoptimized: true },
+  experimental: { cpus: 2 },
+};
+export default config;

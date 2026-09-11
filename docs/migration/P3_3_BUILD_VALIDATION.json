@@ -1,0 +1,89 @@
+{
+  "format": "nexonova.p33-validation.v1",
+  "checks": [
+    {
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/synthetic",
+      "exit_code": 0,
+      "output": "\nadded 35 packages in 9s\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/synthetic",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 typecheck\n> tsc --noEmit\n\n"
+    },
+    {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/synthetic",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 test\n> node --test tests/*.test.mjs\n\nTAP version 13\n# Subtest: public content has required renderable collections\nok 1 - public content has required renderable collections\n  ---\n  duration_ms: 2.600685\n  type: 'test'\n  ...\n# Subtest: public configuration contains no private factory contract\nok 2 - public configuration contains no private factory contract\n  ---\n  duration_ms: 0.32586\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 213.607463\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/synthetic",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 build\n> next build\n\n\u26a0 No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache\n   \u25b2 Next.js 15.5.25\n   - Experiments (use with caution):\n     \u00b7 cpus: 2\n\n   Creating an optimized production build ...\n \u2713 Compiled successfully in 8.8s\n   Linting and checking validity of types ...\n   Collecting page data ...\n   Generating static pages (0/4) ...\n   Generating static pages (1/4) \n   Generating static pages (2/4) \n   Generating static pages (3/4) \n \u2713 Generating static pages (4/4)\n   Finalizing page optimization ...\n   Collecting build traces ...\n\nRoute (app)                                 Size  First Load JS\n\u250c \u25cb /                                      648 B         103 kB\n\u2514 \u25cb /_not-found                            998 B         104 kB\n+ First Load JS shared by all             103 kB\n  \u251c chunks/255-37e0f0325134c4d7.js       46.4 kB\n  \u251c chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB\n  \u2514 other shared chunks (total)           1.9 kB\n\n\n\u25cb  (Static)  prerendered as static content\n\n"
+    },
+    {
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/nexonova",
+      "exit_code": 0,
+      "output": "\nadded 35 packages in 7s\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/nexonova",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 typecheck\n> tsc --noEmit\n\n"
+    },
+    {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/nexonova",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 test\n> node --test tests/*.test.mjs\n\nTAP version 13\n# Subtest: public content has required renderable collections\nok 1 - public content has required renderable collections\n  ---\n  duration_ms: 2.731934\n  type: 'test'\n  ...\n# Subtest: public configuration contains no private factory contract\nok 2 - public configuration contains no private factory contract\n  ---\n  duration_ms: 0.254161\n  type: 'test'\n  ...\n1..2\n# tests 2\n# suites 0\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 242.42191\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/var/tmp/nexonova-p33-validation/nexonova",
+      "exit_code": 0,
+      "output": "\n> corporate-site-base@0.1.0 build\n> next build\n\n\u26a0 No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache\n   \u25b2 Next.js 15.5.25\n   - Experiments (use with caution):\n     \u00b7 cpus: 2\n\n   Creating an optimized production build ...\n \u2713 Compiled successfully in 7.9s\n   Linting and checking validity of types ...\n   Collecting page data ...\n   Generating static pages (0/4) ...\n   Generating static pages (1/4) \n   Generating static pages (2/4) \n   Generating static pages (3/4) \n \u2713 Generating static pages (4/4)\n   Finalizing page optimization ...\n   Collecting build traces ...\n\nRoute (app)                                 Size  First Load JS\n\u250c \u25cb /                                      647 B         103 kB\n\u2514 \u25cb /_not-found                            995 B         104 kB\n+ First Load JS shared by all             103 kB\n  \u251c chunks/255-37e0f0325134c4d7.js       46.4 kB\n  \u251c chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB\n  \u2514 other shared chunks (total)           1.9 kB\n\n\n\u25cb  (Static)  prerendered as static content\n\n"
+    }
+  ],
+  "scope": "visual template only, no product generator",
+  "stage": "/var/tmp/nexonova-p33-validation"
+}

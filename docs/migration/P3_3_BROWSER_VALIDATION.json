@@ -1,0 +1,42 @@
+[
+  {
+    "pilot": "synthetic",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "output": "\n> corporate-site-base@0.1.0 typecheck\n> tsc --noEmit\n\n"
+  },
+  {
+    "pilot": "synthetic",
+    "command": [
+      "npm",
+      "run",
+      "test:browser"
+    ],
+    "exit_code": 0,
+    "output": "\n> corporate-site-base@0.1.0 test:browser\n> playwright test\n\n\nRunning 3 tests using 1 worker\n\u00b7\u00b7\u00b7\n  3 passed (9.0s)\n"
+  },
+  {
+    "pilot": "nexonova",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "output": "\n> corporate-site-base@0.1.0 typecheck\n> tsc --noEmit\n\n"
+  },
+  {
+    "pilot": "nexonova",
+    "command": [
+      "npm",
+      "run",
+      "test:browser"
+    ],
+    "exit_code": 0,
+    "output": "\n> corporate-site-base@0.1.0 test:browser\n> playwright test\n\n\nRunning 3 tests using 1 worker\n\u00b7\u00b7\u00b7\n  3 passed (5.5s)\n"
+  }
+]

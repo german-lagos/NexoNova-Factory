@@ -16,3 +16,5 @@ El usuario aprobó explícitamente MIGRATION_PLAN.md el 2026-09-06. Los document
 Véanse [los ajustes documentados](PLAN_ADJUSTMENTS.md), [la arquitectura actual](../architecture.md) y [el informe de esta entrega parcial](../../REFACTOR_REPORT.md).
 
 No se ha declarado completa la migración. Las pruebas disponibles se ejecutan al cierre de cada fase preparada; las pruebas de producto y aislamiento Docker no se sustituyen por mocks ni por existencia de archivos.
+
+Estado posterior: P3.1/P3.2 aprobadas; [P3.3 base visual](P3_3.md) implementada para revisión. P3.4 no iniciada.

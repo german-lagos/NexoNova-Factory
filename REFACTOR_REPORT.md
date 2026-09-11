@@ -1,6 +1,6 @@
 # REFACTOR_REPORT — Entrega incremental parcial
 
-Inicio: 2026-09-06. Actualización: 2026-09-11. **P2 PASS_WITH_LIMITATIONS aprobado por el usuario.** Carpetas normalizadas; P3.1 y P3.2 implementadas para revisión. P3.3 no iniciada. No se ha generado nexonova-website ni completado P3.
+Inicio: 2026-09-06. Actualización: 2026-09-11. **P2 PASS_WITH_LIMITATIONS aprobado por el usuario.** Carpetas normalizadas; P3.1 y P3.2 aprobadas. Base visual P3.3 implementada para revisión; P3.4 no iniciada. No se ha generado nexonova-website ni completado P3.
 
 ## Resultado
 
@@ -88,7 +88,7 @@ Contratos aún contienen nombres y campos académicos; funciones legadas inactiv
 
 Las dos regresiones conocidas están corregidas y Docker fue validado localmente. El acceso desde el sandbox se bloqueó; las pruebas se ejecutaron con autorización fuera de él, conservando todas las restricciones del contenedor. La preparación descargó la imagen oficial sin credenciales; un fallo DNS inicial se resolvió en el segundo intento, sin cambiar servicios. El executor mantiene --pull=never, sin red ni puertos.
 
-El usuario aprobó P2 y autorizó P3 por etapas; la aceptación no habilita producción ni fases posteriores. Tras SIGKILL puede quedar un contenedor y temporales: recover-run conserva incertidumbre y no repite herramientas; la prueba demostró inspección/limpieza explícita. La redacción sigue siendo heurística. CPU/memoria/PIDs se verificaron en HostConfig y cgroups, sin provocar OOM/saturación; el límite de archivo y noexec se ejercitaron realmente. No se validaron otras plataformas ni CVEs de imagen, SIGTERM o cortes eléctricos. La cuenta host/daemon se consideran confiables; los manifiestos no están firmados y la salida de unittest no certifica tests maliciosos. La aprobación P2 fue concedida; esta entrega P3.1/P3.2 requiere revisión antes de P3.3.
+El usuario aprobó P2 y autorizó P3 por etapas; la aceptación no habilita producción ni fases posteriores. Tras SIGKILL puede quedar un contenedor y temporales: recover-run conserva incertidumbre y no repite herramientas; la prueba demostró inspección/limpieza explícita. La redacción sigue siendo heurística. CPU/memoria/PIDs se verificaron en HostConfig y cgroups, sin provocar OOM/saturación; el límite de archivo y noexec se ejercitaron realmente. No se validaron otras plataformas ni CVEs de imagen, SIGTERM o cortes eléctricos. La cuenta host/daemon se consideran confiables; los manifiestos no están firmados y la salida de unittest no certifica tests maliciosos. La aprobación P2 fue concedida; P3.1/P3.2 fueron aprobadas; P3.3 requiere ahora revisión antes de P3.4.
 
 ## Funcionalidades todavía no implementadas
 
@@ -96,7 +96,7 @@ Generación Next.js, templates corporativa/business-platform, módulos, Better A
 
 ## Pasos recomendados hacia v0.2
 
-1. Revisar P3.1/P3.2 y resolver selección/procedencia de assets, recursos ausentes, Inter y contenido antes de P3.3. Mantener las limitaciones P2 aceptadas y no publicar sin resolver Git/procedencia cuando corresponda.
+1. Revisar P3.3 y sus diferencias visuales antes de P3.4. Material dudoso permanece excluido; Inter local y contenido definitivo siguen pendientes para su incorporación. Mantener las limitaciones P2 aceptadas y no publicar sin resolver Git/procedencia cuando corresponda.
 2. Recuperar el repositorio Git real y resolver procedencia antes de publicar.
 3. Implementar corporate-site con manifest, versiones y build/tests independientes de la fábrica.
 4. Continuar business-platform y módulos con consumidor real, luego mantenimiento; integrar IA solo donde aporte valor.
@@ -114,3 +114,12 @@ Factory: nexonova-factory. Fuente autorizada: nexonova-prototype (raíz hermana 
 133 pruebas aprobadas con Docker habilitado; estructura, imports, enlaces y CLI validados; cero contenedores temporales restantes. Los 99 archivos coinciden con el snapshot preservado. Se corrigió una carrera de confirmación de limpieza del executor sin relajar restricciones ni tests; política docker-unittest.v3, tres regresiones nuevas. Fallo inicial y resultado final preservados en [el registro P3](docs/migration/P3.md).
 
 P3.1/P3.2 completas para revisión; P3 sigue parcial. Ambos pilotos validan sus contratos y fuentes. Material/procedencia, recursos ausentes, tipografía y contenido siguen pendientes. No existe nexonova-website ni se ha iniciado P3.3/P4–P7. Se requiere revisión humana antes de continuar.
+
+
+## P3.3 — Base visual
+
+Se creó templates/corporate-site con layout, tokens, componentes React propios y CSS Modules; contenido/configuración separado. Se reutilizaron referencias de paleta, composición y estilos del prototipo sin ejecutar/copiar sus scripts ni assets dudosos. No se sustituyó ni modificó runtime Python. No se implementó generador ni interacciones demo. Inventario, diferencias visuales, dependencias y evidencia en [P3_3.md](docs/migration/P3_3.md).
+
+Las menciones previas de P3.1/P3.2 pendientes o P3.3 no iniciada documentan entregas anteriores. El usuario aprobó las precondiciones con omisión de material dudoso y fallback tipográfico. La siguiente autorización necesaria es P3.4, después de revisión humana de esta base. No hay aprobación productiva.
+
+Validación final P3.3: 136 pruebas de fábrica aprobadas; ambas configuraciones pasan npm ci, typecheck y build, 2 pruebas de contenido por configuración y 3 pruebas de navegador por configuración. Capturas desktop/móvil conservadas. El prototipo se verifica contra sus 99 hashes. No se certifica equivalencia visual completa ni auditoría WCAG; revisión humana pendiente.

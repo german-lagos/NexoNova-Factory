@@ -1,0 +1,722 @@
+..........FF............FF.EEEEEEEEEE.........EEEEEEEEEEEEEEEEEEEEEEEEEE [ 52%]
+EE.........................EEEEEE.EEEE.EE..EEEEE......EEEEE.E...         [100%]
+==================================== ERRORS ====================================
+______________ ERROR at setup of test_real_isolation_and_success _______________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+________________ ERROR at setup of test_real_outcomes[failure] _________________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+________________ ERROR at setup of test_real_outcomes[timeout] _________________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_real_outcomes[output_limit] ______________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__________ ERROR at setup of test_real_interruption_recovery[sigint] ___________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___________ ERROR at setup of test_real_interruption_recovery[crash] ___________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_paths_rejected_before_container[symlink] ________
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_paths_rejected_before_container[hardlink] _______
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______ ERROR at setup of test_paths_rejected_before_container[traversal] _______
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_paths_rejected_before_container[absolute] _______
+tests/test_p2_docker.py:33: in case
+    store=ProjectStore(tmp_path/'private','client-a','site')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__________ ERROR at setup of test_truncated_quoted_output_is_redacted __________
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_sigint_partial_evidence_cli_exit_and_cleanup ______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______ ERROR at setup of test_work_order_restricts_before_process[scope] _______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_work_order_restricts_before_process[excluded] _____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______ ERROR at setup of test_work_order_restricts_before_process[input] _______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_work_order_restricts_before_process[latency] ______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_work_order_restricts_before_process[dry_run] ______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_work_order_change_invalidates_approval_and_cannot_enable_network _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_reference_portable_preserves_bytes_and_does_not_import_claims _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_reference_rejects_links_credentials_and_unknown_version _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+____ ERROR at setup of test_recovery_after_actual_abrupt_exit_is_idempotent ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_recovery_completes_interrupted_state_commit_without_replaying _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______ ERROR at setup of test_recovery_obeys_writer_lock_and_run_boundary ______
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_real_host_cwd_environment_streams_and_failure _____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_real_missing_executable_persists_error_and_cleans_staging _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__________ ERROR at setup of test_real_unittest_success_is_persisted ___________
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____________ ERROR at setup of test_timeout_reaps_real_host_child _____________
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___ ERROR at setup of test_approval_rejection_precedes_any_process[missing] ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___ ERROR at setup of test_approval_rejection_precedes_any_process[content] ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+____ ERROR at setup of test_approval_rejection_precedes_any_process[policy] ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+____ ERROR at setup of test_approval_rejection_precedes_any_process[client] ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_rejected_write_preserves_external_directory[../outside.json] _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_rejected_write_preserves_external_directory[/tmp/outside.json] _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_rejected_write_preserves_external_directory[link/outside.json] _
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___________ ERROR at setup of test_lock_excludes_real_second_process ___________
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___ ERROR at setup of test_real_output_secret_is_absent_from_persisted_logs ____
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__ ERROR at setup of test_quoted_secret_with_spaces_is_fully_redacted_in_logs __
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+________ ERROR at setup of test_sigint_leaves_recoverable_finished_run _________
+tests/test_p2_validation.py:22: in store
+    value = ProjectStore(tmp_path / "private", "client-a", "site")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+____________ ERROR at setup of test_escape_paths_rejected[../other] ____________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___________ ERROR at setup of test_escape_paths_rejected[/tmp/file] ____________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_________ ERROR at setup of test_escape_paths_rejected[x/../../other] __________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_escape_paths_rejected[./x] _______________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_escape_paths_rejected[x//y] ______________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_escape_paths_rejected[x\\y] ______________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___________ ERROR at setup of test_symlink_and_hardlink_are_rejected ___________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+________ ERROR at setup of test_replaced_project_directory_is_rejected _________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_cross_client_directory_write_is_rejected ________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_writer_lock_and_unique_runs ______________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___ ERROR at setup of test_approval_is_bound_to_content_action_and_consumed ____
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_expired_or_cross_client_approval_rejected _______
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______ ERROR at setup of test_preview_has_no_process_and_keeps_approval _______
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+___ ERROR at setup of test_missing_docker_never_falls_back_to_host_execution ___
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______ ERROR at setup of test_free_shell_and_missing_approval_are_blocked ______
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__________ ERROR at setup of test_tool_call_budget_prevents_execution __________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_docker_command_never_mounts_approvals_or_host_credentials _
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__ ERROR at setup of test_executor_reader_handles_timeout_and_redacts_output ___
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____________ ERROR at setup of test_executor_reader_bounds_output _____________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+____________ ERROR at setup of test_zero_reported_tests_cannot_pass ____________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_ ERROR at setup of test_snapshot_excludes_git_and_never_copies_credential_files _
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+______________ ERROR at setup of test_source_secret_is_not_copied ______________
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____ ERROR at setup of test_changed_execution_policy_invalidates_approval _____
+tests/test_storage.py:20: in store
+    result = ProjectStore(tmp_path / "private", "acme", "site")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:90: in __init__
+    self.root = checked_root(root)
+                ^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+=================================== FAILURES ===================================
+______________________ test_harness_unknown_agent_raises _______________________
+tests/test_factory.py:141: in test_harness_unknown_agent_raises
+    harness = HarnessRunner(factory_root=Path.cwd(), project_dir=tmp_path / "project", run_dir=run_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/harness.py:26: in __init__
+    self.project_dir = checked_root(project_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_______________________ test_orchestrator_bootstrap_run ________________________
+tests/test_factory.py:151: in test_orchestrator_bootstrap_run
+    run_dir = OrchestratorGraph(factory_root=factory_root, project_dir=project).run("Preparar fabrica ARNES SDD para pruebas")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/orchestrator.py:76: in run
+    self.initialize_project()
+factory/orchestrator.py:36: in initialize_project
+    self.project_dir = checked_root(self.project_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+__________ test_failed_run_has_honest_closure_and_cannot_be_promoted ___________
+tests/test_integrity.py:66: in test_failed_run_has_honest_closure_and_cannot_be_promoted
+    run = OrchestratorGraph(factory_root=root, project_dir=tmp_path / "project").run("diagnostic")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/orchestrator.py:76: in run
+    self.initialize_project()
+factory/orchestrator.py:36: in initialize_project
+    self.project_dir = checked_root(self.project_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+factory/storage.py:30: in checked_root
+    raise StorageError("Use a dedicated workspace outside the factory source tree")
+E   factory.storage.StorageError: Use a dedicated workspace outside the factory source tree
+_____________________ test_cli_failed_run_returns_nonzero ______________________
+tests/test_integrity.py:79: in test_cli_failed_run_returns_nonzero
+    assert main(["run", "--project", str(tmp_path / "p"), "--objective", "diagnostic"]) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = main(['run', '--project', '/home/germanleiks/NexoNova/nexonova-factory/.migration-tools/p33-temp/pytest-of-germanleiks/pytest-0/test_cli_failed_run_returns_no0/p', '--objective', 'diagnostic'])
+----------------------------- Captured stderr call -----------------------------
+error=Use a dedicated workspace outside the factory source tree
+=========================== short test summary info ============================
+ERROR tests/test_p2_docker.py::test_real_isolation_and_success - factory.stor...
+ERROR tests/test_p2_docker.py::test_real_outcomes[failure] - factory.storage....
+ERROR tests/test_p2_docker.py::test_real_outcomes[timeout] - factory.storage....
+ERROR tests/test_p2_docker.py::test_real_outcomes[output_limit] - factory.sto...
+ERROR tests/test_p2_docker.py::test_real_interruption_recovery[sigint] - fact...
+ERROR tests/test_p2_docker.py::test_real_interruption_recovery[crash] - facto...
+ERROR tests/test_p2_docker.py::test_paths_rejected_before_container[symlink]
+ERROR tests/test_p2_docker.py::test_paths_rejected_before_container[hardlink]
+ERROR tests/test_p2_docker.py::test_paths_rejected_before_container[traversal]
+ERROR tests/test_p2_docker.py::test_paths_rejected_before_container[absolute]
+ERROR tests/test_p2_fixes.py::test_truncated_quoted_output_is_redacted - fact...
+ERROR tests/test_p2_fixes.py::test_sigint_partial_evidence_cli_exit_and_cleanup
+ERROR tests/test_p2_state.py::test_work_order_restricts_before_process[scope]
+ERROR tests/test_p2_state.py::test_work_order_restricts_before_process[excluded]
+ERROR tests/test_p2_state.py::test_work_order_restricts_before_process[input]
+ERROR tests/test_p2_state.py::test_work_order_restricts_before_process[latency]
+ERROR tests/test_p2_state.py::test_work_order_restricts_before_process[dry_run]
+ERROR tests/test_p2_state.py::test_work_order_change_invalidates_approval_and_cannot_enable_network
+ERROR tests/test_p2_state.py::test_reference_portable_preserves_bytes_and_does_not_import_claims
+ERROR tests/test_p2_state.py::test_reference_rejects_links_credentials_and_unknown_version
+ERROR tests/test_p2_state.py::test_recovery_after_actual_abrupt_exit_is_idempotent
+ERROR tests/test_p2_state.py::test_recovery_completes_interrupted_state_commit_without_replaying
+ERROR tests/test_p2_state.py::test_recovery_obeys_writer_lock_and_run_boundary
+ERROR tests/test_p2_validation.py::test_real_host_cwd_environment_streams_and_failure
+ERROR tests/test_p2_validation.py::test_real_missing_executable_persists_error_and_cleans_staging
+ERROR tests/test_p2_validation.py::test_real_unittest_success_is_persisted - ...
+ERROR tests/test_p2_validation.py::test_timeout_reaps_real_host_child - facto...
+ERROR tests/test_p2_validation.py::test_approval_rejection_precedes_any_process[missing]
+ERROR tests/test_p2_validation.py::test_approval_rejection_precedes_any_process[content]
+ERROR tests/test_p2_validation.py::test_approval_rejection_precedes_any_process[policy]
+ERROR tests/test_p2_validation.py::test_approval_rejection_precedes_any_process[client]
+ERROR tests/test_p2_validation.py::test_rejected_write_preserves_external_directory[../outside.json]
+ERROR tests/test_p2_validation.py::test_rejected_write_preserves_external_directory[/tmp/outside.json]
+ERROR tests/test_p2_validation.py::test_rejected_write_preserves_external_directory[link/outside.json]
+ERROR tests/test_p2_validation.py::test_lock_excludes_real_second_process - f...
+ERROR tests/test_p2_validation.py::test_real_output_secret_is_absent_from_persisted_logs
+ERROR tests/test_p2_validation.py::test_quoted_secret_with_spaces_is_fully_redacted_in_logs
+ERROR tests/test_p2_validation.py::test_sigint_leaves_recoverable_finished_run
+ERROR tests/test_storage.py::test_escape_paths_rejected[../other] - factory.s...
+ERROR tests/test_storage.py::test_escape_paths_rejected[/tmp/file] - factory....
+ERROR tests/test_storage.py::test_escape_paths_rejected[x/../../other] - fact...
+ERROR tests/test_storage.py::test_escape_paths_rejected[./x] - factory.storag...
+ERROR tests/test_storage.py::test_escape_paths_rejected[x//y] - factory.stora...
+ERROR tests/test_storage.py::test_escape_paths_rejected[x\\y] - factory.stora...
+ERROR tests/test_storage.py::test_symlink_and_hardlink_are_rejected - factory...
+ERROR tests/test_storage.py::test_replaced_project_directory_is_rejected - fa...
+ERROR tests/test_storage.py::test_cross_client_directory_write_is_rejected - ...
+ERROR tests/test_storage.py::test_writer_lock_and_unique_runs - factory.stora...
+ERROR tests/test_storage.py::test_approval_is_bound_to_content_action_and_consumed
+ERROR tests/test_storage.py::test_expired_or_cross_client_approval_rejected
+ERROR tests/test_storage.py::test_preview_has_no_process_and_keeps_approval
+ERROR tests/test_storage.py::test_missing_docker_never_falls_back_to_host_execution
+ERROR tests/test_storage.py::test_free_shell_and_missing_approval_are_blocked
+ERROR tests/test_storage.py::test_tool_call_budget_prevents_execution - facto...
+ERROR tests/test_storage.py::test_docker_command_never_mounts_approvals_or_host_credentials
+ERROR tests/test_storage.py::test_executor_reader_handles_timeout_and_redacts_output
+ERROR tests/test_storage.py::test_executor_reader_bounds_output - factory.sto...
+ERROR tests/test_storage.py::test_zero_reported_tests_cannot_pass - factory.s...
+ERROR tests/test_storage.py::test_snapshot_excludes_git_and_never_copies_credential_files
+ERROR tests/test_storage.py::test_source_secret_is_not_copied - factory.stora...
+ERROR tests/test_storage.py::test_changed_execution_policy_invalidates_approval
+FAILED tests/test_factory.py::test_harness_unknown_agent_raises - factory.sto...
+FAILED tests/test_factory.py::test_orchestrator_bootstrap_run - factory.stora...
+FAILED tests/test_integrity.py::test_failed_run_has_honest_closure_and_cannot_be_promoted
+FAILED tests/test_integrity.py::test_cli_failed_run_returns_nonzero - Asserti...
+4 failed, 71 passed, 61 errors in 1.36s

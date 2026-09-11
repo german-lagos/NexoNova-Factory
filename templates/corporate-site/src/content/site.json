@@ -1,0 +1,31 @@
+{
+  "format": "corporate-site.visual.v1",
+  "brand": {
+    "name": "Empresa Sintética",
+    "navy": "#172033",
+    "blue": "#234567",
+    "cyan": "#267878"
+  },
+  "hero": {
+    "title": "Ideas para tu negocio.",
+    "accent": "Una presencia digital propia.",
+    "description": "Contenido de ejemplo para revisar la composición de un sitio corporativo."
+  },
+  "about": {
+    "title": "Un espacio para presentar tu proyecto.",
+    "description": "Este texto es una muestra editorial configurable."
+  },
+  "services": [
+    {
+      "title": "Servicio de ejemplo",
+      "description": "Descripción provisional para revisión."
+    }
+  ],
+  "plans": [],
+  "faq": [
+    {
+      "question": "¿Es una oferta comercial?",
+      "answer": "No. Esta es una demostración visual con contenido provisional."
+    }
+  ]
+}

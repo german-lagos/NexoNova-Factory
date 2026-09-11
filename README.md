@@ -2,7 +2,7 @@
 
 Núcleo local en Python para evolucionar hacia una fábrica de software de NexoNova. **Estado actual: migración parcial y experimental. No genera todavía aplicaciones web ni está aprobado para producción.**
 
-P0 estableció la línea base y P1 eliminó la aceptación del bootstrap documental como trabajo real. P2 incorpora almacenamiento privado, validación y un adaptador de pruebas preparado, pero su aislamiento Docker sigue pendiente de validación. P3 espera el brief concreto elegido por el usuario. Consulte [el informe de cambios](REFACTOR_REPORT.md) y [el estado de las fases](docs/migration/README.md).
+P0 estableció la línea base y P1 eliminó la aceptación del bootstrap documental como trabajo real. P2 incorpora almacenamiento privado y un adaptador validado con Docker real: PASS_WITH_LIMITATIONS aprobado por el usuario. P3.1 y P3.2 incorporan entradas preservadas y contratos versionados; esperan revisión antes de P3.3. Consulte [el informe de cambios](REFACTOR_REPORT.md) y [el estado de las fases](docs/migration/README.md).
 
 ## Requisitos
 
@@ -42,7 +42,7 @@ python3 -B -m factory.cli run-tool --root /tmp/nexonova-workspaces --client demo
 
 La vista previa devuelve `needs_user_input` y código 1 porque no acredita una prueba ejecutada. Sin Docker o imagen aprobada, la ejecución devuelve `not_answerable`. Ninguno de esos estados significa un test aprobado.
 
-Para evaluar el adaptador más adelante, un operador deberá disponer de Docker local, revisar una imagen `python@sha256:<digest real de 64 caracteres hexadecimales>` y guardarla en una configuración privada basada en `config/factory.json`. `approve-tool` requiere esa misma configuración y un actor host; la autorización se consume una vez y caduca. Véase [seguridad y límites](docs/security.md). No sustituir el digest por el ejemplo literal ni ejecutar clientes antes de cerrar las pruebas de aislamiento.
+Para reproducir la validación, un operador debe disponer de Docker local y revisar una imagen `python@sha256:<digest real de 64 caracteres hexadecimales>` y guardarla en una configuración privada basada en `config/factory.json`. `approve-tool` requiere esa misma configuración y un actor host; la autorización se consume una vez y caduca. Véase [seguridad y límites](docs/security.md). No sustituir el digest por el ejemplo literal ni ejecutar clientes antes de la revisión humana de seguridad.
 
 Los comandos `run` e `init-project` permanecen como compatibilidad diagnóstica. `run --project <directorio externo> --objective <texto>` devuelve un cierre bloqueado: los 13 agentes académicos no ejecutan sus reportes estáticos. `verify --run <directorio de run>` comprueba formato/integridad y no modifica evidencia. Un run académico sin manifiesto nuevo no se certifica como actual.
 
@@ -58,4 +58,17 @@ No se movieron ni eliminaron archivos legados. La ausencia de historial Git est�
 
 ## Próximo paso
 
-Validar P2 con Docker local y revisión humana de seguridad, y recibir el brief de P3. Después podrán comenzar la generación corporativa, plataforma de negocio, mantenimiento y preparación de entrega en el orden del plan aprobado. No se han realizado despliegues, cambios de servicios externos ni migraciones de datos.
+Revisar P3.1 y P3.2, resolver el material pendiente y autorizar explícitamente P3.3 antes de implementar generación. Las fases posteriores permanecen fuera del alcance actual. No se han realizado despliegues, cambios de servicios externos ni migraciones de datos.
+
+## Preparación P3: entradas y contratos
+
+La fábrica reside en nexonova-factory y la fuente preservada en la carpeta hermana nexonova-prototype. El registro config/sources.json usa rutas relativas al checkout. P2 está aprobado; P3.1/P3.2 están preparadas para revisión. Todavía no existe nexonova-website ni se inicia P3.3.
+
+Validar sin ejecutar el prototipo:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate_product_inputs.py --pilot config/pilots/nexonova
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate_product_inputs.py --pilot config/pilots/synthetic
+```
+
+Añadir --require-ready exige que el material esté aprobado: actualmente devuelve código 2 por decisiones pendientes. Detalles y archivos en [P3](docs/migration/P3.md). Abrir la nueva carpeta en el IDE; no existe alias operativo con el nombre anterior.

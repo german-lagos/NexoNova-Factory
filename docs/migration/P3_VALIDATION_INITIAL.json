@@ -1,0 +1,76 @@
+{
+  "scope": "rename, P3.1 and P3.2 only",
+  "prototype_files": 99,
+  "all_prototype_hashes_preserved": true,
+  "checks": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_product_contracts.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": ".........................                                                [100%]\n25 passed in 0.08s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/nexonova"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "product_inputs=valid; source=verified; generation=not-authorized\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/synthetic"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "product_inputs=valid; source=verified; generation=not-authorized\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/nexonova",
+        "--require-ready"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout": "",
+      "stderr": "product_inputs=blocked; inspect contracts, source integrity and material decisions\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--tb=short"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "stdout": "...........................F............................................ [ 55%]\n..........................................................               [100%]\n=================================== FAILURES ===================================\n_______________________ test_real_outcomes[output_limit] _______________________\ntests/test_p2_docker.py:151: in test_real_outcomes\n    finish(store,result,scenario)\ntests/test_p2_docker.py:75: in finish\n    assert existing.returncode == 0 and not existing.stdout.strip(), existing.stderr\nE   AssertionError: \nE   assert (0 == 0 and not 'a5c9879665b5')\nE    +  where 0 = CompletedProcess(args=['docker', '--host', 'unix:///var/run/docker.sock', 'ps', '-aq', '--filter', 'name=^/nexonova-test-0c87925469054bd794b92ee47c5b2d47$'], returncode=0, stdout='a5c9879665b5\\n', stderr='').returncode\nE    +  and   'a5c9879665b5' = <built-in method strip of str object at 0x73e689debd70>()\nE    +    where <built-in method strip of str object at 0x73e689debd70> = 'a5c9879665b5\\n'.strip\nE    +      where 'a5c9879665b5\\n' = CompletedProcess(args=['docker', '--host', 'unix:///var/run/docker.sock', 'ps', '-aq', '--filter', 'name=^/nexonova-test-0c87925469054bd794b92ee47c5b2d47$'], returncode=0, stdout='a5c9879665b5\\n', stderr='').stdout\n=========================== short test summary info ============================\nFAILED tests/test_p2_docker.py::test_real_outcomes[output_limit] - AssertionE...\n1 failed, 129 passed in 13.99s\n",
+      "stderr": ""
+    }
+  ],
+  "p3_3_started": false,
+  "product_generated": false
+}

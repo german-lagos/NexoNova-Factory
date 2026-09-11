@@ -87,11 +87,22 @@ def cmd_workspace(args: argparse.Namespace) -> int:
     if args.command == "approve-tool":
         if config.python_image is None:
             raise ValueError("Choose and review a pinned Python image before approving execution")
-        executor = ToolExecutor(store, config)
+        executor = ToolExecutor(store, config, work_order=read_json(Path(args.work_order)) if args.work_order else None)
         print("approval_id=" + store.approve_tool(args.tool, actor=args.actor, policy_hash=executor.policy_hash))
         return 0
-    result = ToolExecutor(store, config).run(args.tool, approval_id=args.approval, dry_run=args.dry_run)
+    result = ToolExecutor(store, config, work_order=read_json(Path(args.work_order)) if args.work_order else None).run(args.tool, approval_id=args.approval, dry_run=args.dry_run)
     print(json.dumps(result, ensure_ascii=True))
+    return 0 if result["status"] == "complete" else 1
+
+
+def cmd_state(args: argparse.Namespace) -> int:
+    from .state_transfer import import_reference, recover_run
+    store = ProjectStore(Path(args.root), args.client, args.project_id)
+    if args.command == "import-legacy-reference":
+        print("reference=" + import_reference(store, Path(args.source)))
+        return 0
+    result = recover_run(store, args.run_id)
+    print(json.dumps(result))
     return 0 if result["status"] == "complete" else 1
 
 
@@ -124,6 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
         item.add_argument("--project-id", required=True)
         if command != "init-workspace":
             item.add_argument("--tool", choices=sorted(TOOL_COMMANDS), required=True)
+            item.add_argument("--work-order", help="Optional restrictive test WorkOrder JSON")
         if command == "approve-tool":
             item.add_argument("--config")
             item.add_argument("--actor", required=True, help="Host operator issuing this scoped, one-use approval")
@@ -132,6 +144,16 @@ def build_parser() -> argparse.ArgumentParser:
             item.add_argument("--approval")
             item.add_argument("--dry-run", action="store_true")
         item.set_defaults(func=cmd_workspace)
+    for command in ("import-legacy-reference", "recover-run"):
+        item = sub.add_parser(command)
+        item.add_argument("--root", required=True)
+        item.add_argument("--client", required=True)
+        item.add_argument("--project-id", required=True)
+        if command == "import-legacy-reference":
+            item.add_argument("--source", required=True)
+        else:
+            item.add_argument("--run-id", required=True)
+        item.set_defaults(func=cmd_state)
     return parser
 
 
@@ -140,6 +162,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
+    except KeyboardInterrupt:
+        print("interrupted=SIGINT", file=sys.stderr)
+        return 130
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print("error=" + redact(str(exc)), file=sys.stderr)
         return 2

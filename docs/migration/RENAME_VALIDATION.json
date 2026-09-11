@@ -1,0 +1,15 @@
+{
+  "prototype_files": 99,
+  "prototype_bytes_unchanged": true,
+  "operational_paths_updated": [
+    ".venv/pyvenv.cfg",
+    ".venv/bin/activate",
+    ".venv/bin/activate.csh",
+    ".venv/bin/activate.fish",
+    ".venv/bin/pygmentize",
+    ".venv/bin/py.test",
+    ".venv/bin/pytest",
+    ".migration-tools/installed-20260907/bin/nexonova-factory"
+  ],
+  "historical_reference": "validation-results.json records original execution paths; not an executable configuration"
+}

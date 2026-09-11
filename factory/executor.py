@@ -13,6 +13,7 @@ import time
 import uuid
 
 from .config import FactoryConfig
+from .execution_scope import execution_order, check_scope
 from .storage import ProjectStore, StorageError, tree_hash, safe_path
 from .utils import utc_now, sha256_text, stable_json
 
@@ -21,16 +22,32 @@ TOOL_COMMANDS = {"python.unittest": ("python", "-I", "-B", "-m", "unittest", "di
 
 def redact(text: str) -> str:
     text = re.sub(r"-----BEGIN [^-]*PRIVATE KEY-----[\s\S]*?(?:-----END [^-]*PRIVATE KEY-----|$)", "[REDACTED KEY]", text)
-    text = re.sub(r"(?i)(authorization[\"\']?\s*:\s*[\"\']?bearer\s+|(?:password|api[_-]?key|secret|access[_-]?token)[\"\']?\s*[=:]\s*)[^\s,;]+", r"\1[REDACTED]", text)
+    # Consume escaped characters, multiline values and unterminated quoted tails.
+    # This is heuristic filtering, not a guarantee that arbitrary secrets vanish.
+    prefix = r"(?i)((?:password|api[_-]?key|secret|access[_-]?token)[\"']?\s*[=:]\s*)"
+    value = r"(?:\"(?:\\(?:[\s\S]|$)|[^\"\\])*(?:\"|$)|'(?:\\(?:[\s\S]|$)|[^'\\])*(?:'|$)|[^\s,;]+)"
+    text = re.sub(prefix + value, r"\1[REDACTED]", text)
+    text = re.sub(r"(?i)(authorization[\"']?\s*:\s*[\"']?bearer\s+)[^\s,;]+", r"\1[REDACTED]", text)
     return re.sub(r"\b(?:sk-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{16,}|glpat-[A-Za-z0-9_-]{16,})\b", "[REDACTED]", text)
 
 
+class ExecutionInterrupted(KeyboardInterrupt):
+    """Propagate interruption only after retaining sanitized partial evidence."""
+    def __init__(self, outcome):
+        self.outcome = outcome
+
+
 class ToolExecutor:
-    def __init__(self, store: ProjectStore, config: FactoryConfig) -> None:
+    def __init__(self, store: ProjectStore, config: FactoryConfig, *, work_order: dict | None = None) -> None:
         self.store, self.config = store, config
-        self.policy_hash = sha256_text(stable_json({"adapter": "docker-unittest.v1", "config": config.__dict__, "commands": TOOL_COMMANDS}))
+        self.work_order = execution_order(work_order)
+        self.policy_hash = sha256_text(stable_json({"adapter": "docker-unittest.v3", "config": config.__dict__, "commands": TOOL_COMMANDS, "work_order": self.work_order}))
         self.calls = 0
-        self.deadline = time.monotonic() + config.timeout_seconds
+        latency = config.timeout_seconds
+        if self.work_order is not None:
+            latency = min(latency, self.work_order["constraints"]["max_latency_ms"] / 1000)
+        self.deadline = time.monotonic() + latency
+        self._checkpoint = None
 
     def command(self, docker: str, tool_id: str, name: str, workspace: Path) -> list[str]:
         if tool_id not in TOOL_COMMANDS or self.config.python_image is None:
@@ -59,10 +76,14 @@ class ToolExecutor:
                       "exit_code": None, "tests_run": None, "output": "", "reason": "",
                       "image": self.config.python_image, "sandbox": "docker-local-readonly-no-network",
                       "source_hash": None, "model_usage": "not_applicable", "human_review": "pending"}
+            interruption = None
             try:
                 if tool_id not in TOOL_COMMANDS:
                     raise StorageError("Tool is not allowlisted")
                 result["source_hash"] = tree_hash(self.store.workspace)
+                check_scope(self.store, self.work_order)
+                if self.work_order is not None:
+                    dry_run = dry_run or self.work_order["constraints"]["dry_run"]
                 if dry_run:
                     result.update(status="needs_user_input", reason="Preview only; no process or approval consumed")
                 elif self.calls >= self.config.max_tool_calls or time.monotonic() >= self.deadline:
@@ -75,17 +96,37 @@ class ToolExecutor:
                         self.store.consume_approval(approval_id, tool_id, self.policy_hash)
                         self.calls += 1
                         name = "nexonova-test-" + uuid.uuid4().hex
+                        checkpoint = {"format": "nexonova.checkpoint.v1", "phase": "approved", "container": name,
+                                      "result": dict(result), "policy_hash": self.policy_hash}
+                        def save_partial(partial):
+                            checkpoint["phase"] = "executing"
+                            checkpoint["result"].update(partial)
+                            self.store.write(run_dir, "checkpoint.json", checkpoint)
+                        self._checkpoint = save_partial
+                        self.store.write(run_dir, "checkpoint.json", checkpoint)
                         with tempfile.TemporaryDirectory(prefix="test-input-", dir=self.store.path / "temporary") as directory:
                             snapshot = Path(directory)
+                            checkpoint["staging"] = snapshot.relative_to(self.store.path).as_posix()
+                            self.store.write(run_dir, "checkpoint.json", checkpoint)
                             self._snapshot(snapshot, result["source_hash"])
                             command = self.command(docker, tool_id, name, snapshot)
                             result.update(self._execute(command, docker, name))
+            except KeyboardInterrupt as exc:
+                interruption = exc
+                if isinstance(exc, ExecutionInterrupted):
+                    result.update(exc.outcome)
+                result.update(status="error", termination="interrupted", signal="SIGINT")
+                if not isinstance(exc, ExecutionInterrupted):
+                    result["reason"] = "interrupted"
             except (OSError, ValueError) as exc:
                 result.update(status="error", reason=redact(str(exc)))
+            self._checkpoint = None
             result["finished_at"] = utc_now()
             self.store.write(run_dir, "tool-result.json", result)
             self.store.write(run_dir, "state.json", {"format": "nexonova.tool-run.v1", "lifecycle": "finished",
                              "status": result["status"], "tool_result": "tool-result.json"})
+            if interruption is not None:
+                raise interruption
             return result
 
     def _snapshot(self, destination: Path, expected_hash: str) -> None:
@@ -115,6 +156,7 @@ class ToolExecutor:
             raise StorageError("Workspace changed while preparing the approved snapshot")
 
     def _execute(self, command: list[str], docker: str, name: str) -> dict:
+        interrupted = False
         output = bytearray()
         outcome = {"executed": False, "status": "error", "exit_code": None, "reason": "", "tests_run": None}
         # Credentials/config from the operator's home and environment are not inherited.
@@ -135,6 +177,8 @@ class ToolExecutor:
                                 selector.unregister(key.fileobj)
                             else:
                                 output.extend(chunk)
+                                if self._checkpoint is not None:
+                                    self._checkpoint({"executed": None, "output": redact(output[:self.config.max_output_bytes].decode("utf-8", errors="replace"))})
                         if len(output) > self.config.max_output_bytes:
                             outcome["reason"] = "output_limit"
                             break
@@ -143,17 +187,22 @@ class ToolExecutor:
                             outcome["exit_code"] = process.wait(timeout=max(0.001, self.deadline - time.monotonic()))
                         except subprocess.TimeoutExpired:
                             outcome["reason"] = "timeout"
+            except KeyboardInterrupt:
+                interrupted = True
+                outcome.update(reason="interrupted", termination="interrupted", signal="SIGINT")
             finally:
                 if process.poll() is None:
                     os.killpg(process.pid, signal.SIGKILL)
                 process.wait()
+                if outcome["exit_code"] is None:
+                    outcome["exit_code"] = process.returncode
                 process.stdout.close()
                 # Kill/remove only this operation's named container, including timeout cases.
                 try:
                     cleanup = subprocess.run([docker, "--host", "unix:///var/run/docker.sock", "rm", "-f", name],
                                              env=env, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
                                              stderr=subprocess.DEVNULL, timeout=10)
-                    if cleanup.returncode != 0 and outcome["reason"] in ("timeout", "output_limit"):
+                    if not self._confirm_removed(docker, name, env):
                         outcome["reason"] += "; container cleanup requires operator inspection: " + name
                 except (OSError, subprocess.TimeoutExpired):
                     outcome["reason"] += "; container cleanup could not be confirmed: " + name
@@ -168,4 +217,23 @@ class ToolExecutor:
                 outcome["status"] = "complete"
             else:
                 outcome["reason"] = "Process failed, tool unavailable, or no successful test execution was reported"
+        if interrupted:
+            raise ExecutionInterrupted(outcome)
         return outcome
+
+    @staticmethod
+    def _confirm_removed(docker: str, name: str, env: dict) -> bool:
+        """Observe absence; rm may race with Docker's automatic removal."""
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            check = subprocess.run(
+                [docker, "--host", "unix:///var/run/docker.sock", "ps", "-aq",
+                 "--filter", "name=^/" + name + "$"], env=env,
+                stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL, timeout=1, text=True)
+            if check.returncode != 0:
+                return False
+            if not check.stdout.strip():
+                return True
+            time.sleep(0.05)
+        return False

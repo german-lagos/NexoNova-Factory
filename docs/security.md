@@ -23,11 +23,11 @@ python3 -m factory.cli approve-tool --root /tmp/nexonova-workspaces --client dem
 python3 -m factory.cli run-tool --root /tmp/nexonova-workspaces --client demo --project-id piloto --tool python.unittest --approval ID_DEVUELTO --config /ruta/privada/factory.json
 ```
 
-Esos ejemplos no constituyen autorización para ejecutar clientes. El ID es de uso único y caduca a los diez minutos. Antes de uso real hay que cerrar las pruebas pendientes de P2. No hay APIs de despliegue, gestión de credenciales ni DB write.
+Esos ejemplos no constituyen autorización para ejecutar clientes. El ID es de uso único y caduca a los diez minutos. Antes de uso real hay que revisar humanamente el resultado y las limitaciones de P2. No hay APIs de despliegue, gestión de credenciales ni DB write.
 
 ## Riesgos pendientes
 
-- Docker no está disponible en esta sesión: falta comprobar aislamiento real, recursos, uid/gid, lectura de otros clientes y limpieza tras interrupciones.
+- Docker local fue validado con datos sintéticos: aislamiento, límites, uid/gid, acceso cruzado y limpieza. Véase [el registro P2](migration/P2_FINAL_VALIDATION.md). Sigue pendiente revisión humana; un crash abrupto requiere inspección y limpieza explícita, no replay automático.
 - El daemon Docker local es una capacidad privilegiada del host. No conectarlo a infraestructura productiva para validar este prototipo.
 - Locks son cooperativos; no resisten un atacante con la misma cuenta host ni carreras provocadas por procesos host fuera de la fábrica. Debe existir un único operador/escritor controlado por workspace durante evaluación.
 - Los reportes de tests son salida del proceso: no demuestran cobertura semántica ni seguridad de la aplicación. Hace falta evaluar los tests y validadores de producto en fases posteriores.

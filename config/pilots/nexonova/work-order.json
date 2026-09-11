@@ -1,0 +1,26 @@
+{
+  "format": "nexonova.product-work-order.v1",
+  "work_order_id": "p3-prepare-nexonova",
+  "operation": "prepare-project",
+  "client_id": "nexonova",
+  "project_id": "nexonova-website",
+  "source_id": "nexonova-prototype",
+  "spec_hash": "sha256:a6a1913666e9263a01b6f1ecc750f9d5a5bf2672c1adce697d71f14196efc150",
+  "manifest_hash": "sha256:5d50870a3fd2b5706dbd9b6cf176a40642dc2aa52ab9b0ac517c7f8357a3cf73",
+  "authorization": {
+    "actor": "user",
+    "basis": "Explicit approval of corporate-site v0.1.0, P3 plan and scope restricted to P3.1/P3.2 in this conversation",
+    "allowed_actions": [
+      "snapshot",
+      "validate-contracts"
+    ]
+  },
+  "constraints": {
+    "source_readonly": "required",
+    "external_services": "denied",
+    "max_files": 1000,
+    "max_bytes": 100000000,
+    "generation": "not-authorized",
+    "deployment": "denied"
+  }
+}

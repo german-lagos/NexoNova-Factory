@@ -1,0 +1,135 @@
+{
+  "scope": "rename, P3.1 and P3.2 only",
+  "initial_attempt": "P3_VALIDATION_INITIAL.json",
+  "checks": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_executor_cleanup.py",
+        "tests/test_product_contracts.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "............................                                             [100%]\n28 passed in 0.23s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_p2_docker.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "..........                                                               [100%]\n10 passed in 8.43s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/nexonova"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "product_inputs=valid; source=verified; generation=not-authorized\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/synthetic"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "product_inputs=valid; source=verified; generation=not-authorized\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_product_inputs.py",
+        "--pilot",
+        "config/pilots/nexonova",
+        "--require-ready"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout": "",
+      "stderr": "product_inputs=blocked; inspect contracts, source integrity and material decisions\n"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "........................................................................ [ 54%]\n.............................................................            [100%]\n133 passed in 11.95s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/validate_repository.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "structural_validation=complete\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "factory.cli",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "usage: python -m factory.cli [-h]\n                             {init-project,run,verify,list,init-workspace,approve-tool,run-tool,import-legacy-reference,recover-run} ...\n\nNexoNova Factory \u2014 n\u00facleo local; bootstrap legado bloqueado\n\npositional arguments:\n  {init-project,run,verify,list,init-workspace,approve-tool,run-tool,import-legacy-reference,recover-run}\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "--host",
+        "unix:///var/run/docker.sock",
+        "ps",
+        "-aq",
+        "--filter",
+        "name=nexonova-test-"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "p3_3_started": false,
+  "product_generated": false,
+  "prototype_files": 99,
+  "snapshot_hashes_verified": true,
+  "rename_evidence": "RENAME_VALIDATION.json",
+  "old_name_reference_files": [
+    "docs/migration/validation-results.json"
+  ]
+}

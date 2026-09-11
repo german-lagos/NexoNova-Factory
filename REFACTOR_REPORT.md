@@ -1,10 +1,10 @@
 # REFACTOR_REPORT — Entrega incremental parcial
 
-Inicio: 2026-09-06. Actualización: 2026-09-08. Versión de trabajo: 0.1.0 experimental. **La migración completa no ha terminado. P2: FAIL.** La validación local reproduce fuga parcial de un secreto sintético con espacios y falta de cierre tras SIGINT. Docker no está disponible. No se inicia P3.
+Inicio: 2026-09-06. Actualización: 2026-09-11. **P2 PASS_WITH_LIMITATIONS aprobado por el usuario.** Carpetas normalizadas; P3.1 y P3.2 implementadas para revisión. P3.3 no iniciada. No se ha generado nexonova-website ni completado P3.
 
 ## Resultado
 
-P0 estableció una línea base reproducible de tests y preservación del material académico. P1 impide presentar reportes constantes como ejecución válida. P2 prepara estado privado, aprobaciones vinculadas y un adaptador restringido; su [validación final](docs/migration/P2_FINAL_VALIDATION.md) termina con 71 pruebas aprobadas y 2 fallidas. Deben corregirse ambos defectos y verificar Docker real antes de promoverla, con revisión humana. P3–P7 no se ejecutaron y tienen registros explícitos de pendientes en [docs/migration](docs/migration/README.md).
+P0/P1 preservan su estado. P2 cuenta con aprobación humana explícita y límites aceptados. El usuario aprobó el piloto corporate-site con prototipo preservado, brief y selección separada, demostraciones locales y reconstrucción selectiva. Esta entrega se limita al renombrado, manifiesto de 99 archivos y contratos versionados de preparación. Véase [P3](docs/migration/P3.md). No hay plantilla, frontend, proveedor externo ni producto ejecutable nuevo. P4–P7 no se iniciaron.
 
 No se cambiaron secretos, infraestructura externa o datos productivos; no se desplegó ni se ejecutaron migraciones de BD. No se inicializó Git ni se movió el historial/ERP. AGENTS.md y los tres documentos aprobados permanecen íntegros.
 
@@ -17,6 +17,10 @@ No se cambiaron secretos, infraestructura externa o datos productivos; no se des
 - Material académico como referencia preservada, sin elevarlo a capacidad productiva.
 
 ## Qué se modificó
+
+- Validación Docker P2: config/factory.json fija la imagen oficial Python por digest; no se modificó el runtime ni se redujeron políticas.
+
+- P2/corrección: executor redacta valores delimitados completos, conserva evidencia parcial en checkpoints y persiste interrupciones antes de propagarlas; CLI añade código 130, --work-order, import-legacy-reference y recover-run. La política v2 invalida aprobaciones previas al cambio.
 
 - tests/test_factory.py: aislamiento y comprobaciones semánticas; contexto sintético no vacío.
 - factory/registry.py y harness.py: roles legacy bloqueados, rechazo de autorización pendiente y validación de resultados/rutas.
@@ -43,13 +47,18 @@ Ningún archivo fuente o legado. Se retiraron comportamientos de falsa aprobaci�
 
 ## Qué se creó
 
+- P3.1/P3.2: product_contracts.py, schemas, registro de fuentes, contratos de dos pilotos, fixture sintética, validate_product_inputs.py y 25 pruebas nuevas; inventario y resultados en docs/migration/P3.md.
+
 - Empaquetado: pyproject.toml, requirements-test.lock y exclusiones raíz.
 - factory/reports.py: cierre y verificación de integridad.
 - factory/storage.py: raíz privada por cliente, lock, UUID, aprobaciones y rutas acotadas.
 - factory/config.py y config/factory.json: límites explícitos y ejecución desactivada sin imagen aprobada.
 - factory/executor.py: adaptador experimental Docker local, snapshot filtrado, límites y resultados.
 - tests/test_integrity.py y tests/test_storage.py: regresiones de evidencia y fronteras.
-- tests/test_p2_validation.py: 15 comprobaciones adicionales de procesos, persistencia, escrituras y aprobaciones; dos regresiones fallidas conservadas, sin cambiar el runtime en esta entrega de validación.
+- tests/test_p2_validation.py: 15 comprobaciones de procesos, persistencia, escrituras y aprobaciones; las dos regresiones originales ahora pasan sin cambios.
+- factory/execution_scope.py y state_transfer.py: restricciones WorkOrder, referencias portables y recuperación sin replay.
+- tests/test_p2_fixes.py y test_p2_state.py: 22 casos adicionales de formatos de secretos, interrupción real, restricciones, referencia e interrupción/recuperación de estado.
+- tests/test_p2_docker.py: 10 pruebas opt-in del executor con Docker real; registros sanitizados P2_DOCKER_RESULTS.json y P2_DOCKER_EVENTS.json.
 - scripts/validate_repository.py: imports, estructura, enlaces, versiones y preservación de hashes.
 - README.md, docs/architecture.md, docs/security.md, docs/maintenance.md, docs/deployment.md.
 - Registros P0–P7, ajustes del plan, manifiesto de origen e inventario de cambios por hashes en docs/migration.
@@ -61,19 +70,25 @@ No se crearon carpetas vacías para templates, modules, prompts ni deployment. N
 - P0 original: 9 pruebas aprobadas en copia temporal; 9 con aislamiento corregido.
 - P1: 24 pruebas aprobadas.
 - P2/cierre anterior: 58 pruebas aprobadas; evidencia histórica en [registro de cierre](docs/migration/FINAL_VALIDATION.md).
-- P2/validación actual: 71 passed, 2 failed; código 1. Fallan redacción de secreto entre comillas con espacios y cierre recuperable tras SIGINT. Imports/estructura/hashes protegidos y arranque CLI pasan. Comandos y límites en [P2_FINAL_VALIDATION](docs/migration/P2_FINAL_VALIDATION.md).
+- P2/validación del 2026-09-08: 71 passed, 2 failed (histórico).
+- P2/corrección del 2026-09-09: 95 passed; código 0. Redacción corregida y SIGINT con evidencia parcial redactada, estado terminal y CLI 130. Se verificó una referencia temporal a 128 archivos del legado real, sin cambiar su hash. Imports/estructura/hashes protegidos y arranque CLI pasan. Comandos y límites en [P2_FINAL_VALIDATION](docs/migration/P2_FINAL_VALIDATION.md).
+- P2/Docker: 10 passed; test_p2_validation: 15 passed; fixes/state: 22 passed; suite completa con Docker: **105 passed en 12.37 s**, cero skips/xfails. Estructura/imports y CLI correctos.
+- Daemon/cliente Docker 29.8.0, socket local unix:///var/run/docker.sock, Compose 5.5.1 (no requerido por el adaptador). Imagen oficial python:3.12-slim fijada a `python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea`.
+- 30 contenedores de diagnóstico/repeticiones registrados por eventos: todos destruidos, cero contenedores restantes y cero directorios temporales del cliente Docker. Tras crash la limpieza fue explícita, no atribuida a recover-run.
 - CLI sigue iniciando; bootstrap legado devuelve fallo explícito, no éxito artificial.
 - Empaquetado wheel probado sin dependencias runtime; comprobación instalada y validación estructural registradas al cierre.
-- Los tests de lector de procesos usan subprocess sintéticos confiables: **no prueban aislamiento Docker**.
+- Los tests host siguen sin acreditar Docker por sí solos; la evidencia de contención ahora procede de tests/test_p2_docker.py con contenedores reales, sin mocks de transporte.
 - No hay tests de aplicaciones web, E2E, BD ni despliegue porque esas capacidades no existen aún.
 
 ## Deuda técnica restante
 
-Contratos aún contienen nombres y campos académicos; funciones legadas inactivas permanecen. Falta migrar datos antiguos mediante lector/importador con versión, reanudar ejecuciones, definir retención/backup y soportar más herramientas reales. El lock de tests fija versiones pero no hashes ni todas las plataformas. Falta una matriz de Python y CI. No se ha recuperado Git ni confirmado procedencia completa. Tras reiniciar el entorno se perdió el baseline temporal de código: existe inventario de hashes, pero la reversión exacta al código inicial exige recuperar originales. Se creó un checkpoint local del estado actual, sin presentarlo como baseline histórico.
+Contratos aún contienen nombres y campos académicos; funciones legadas inactivas permanecen. El importador versionado de referencias ya existe y se probó con el legado, pero su ubicación privada definitiva sigue sin elegirse. La recuperación cierra runs sin repetir efectos; la reanudación automática, retención/backup y más herramientas quedan pendientes. El lock de tests fija versiones pero no hashes ni todas las plataformas. Falta una matriz de Python y CI. No se ha recuperado Git ni confirmado procedencia completa. Tras reiniciar el entorno se perdió el baseline temporal de código: existe inventario de hashes, pero la reversión exacta al código inicial exige recuperar originales. Se creó un checkpoint local del estado actual, sin presentarlo como baseline histórico.
 
 ## Riesgos pendientes
 
-P2 tiene dos defectos demostrados: el log conserva parte de un secreto sintético con espacios y SIGINT deja estado running sin ToolResult terminal. Necesita además validación de Docker/imágenes/kernel y revisión de seguridad; binario/socket ausentes e imagen sin configurar impiden ejecutar contenedores aquí. Las comprobaciones de rutas y locks no resisten un atacante con la misma cuenta host. El escaneo/redacción es heurístico; no es una certificación. Un crash puede dejar temporales o contenedores cuya limpieza debe revisar el operador. Manifiestos sin firma no resisten reescritura conjunta del almacén. Un resultado de tests no sustituye revisión de los propios tests ni aprobación humana.
+Las dos regresiones conocidas están corregidas y Docker fue validado localmente. El acceso desde el sandbox se bloqueó; las pruebas se ejecutaron con autorización fuera de él, conservando todas las restricciones del contenedor. La preparación descargó la imagen oficial sin credenciales; un fallo DNS inicial se resolvió en el segundo intento, sin cambiar servicios. El executor mantiene --pull=never, sin red ni puertos.
+
+El usuario aprobó P2 y autorizó P3 por etapas; la aceptación no habilita producción ni fases posteriores. Tras SIGKILL puede quedar un contenedor y temporales: recover-run conserva incertidumbre y no repite herramientas; la prueba demostró inspección/limpieza explícita. La redacción sigue siendo heurística. CPU/memoria/PIDs se verificaron en HostConfig y cgroups, sin provocar OOM/saturación; el límite de archivo y noexec se ejercitaron realmente. No se validaron otras plataformas ni CVEs de imagen, SIGTERM o cortes eléctricos. La cuenta host/daemon se consideran confiables; los manifiestos no están firmados y la salida de unittest no certifica tests maliciosos. La aprobación P2 fue concedida; esta entrega P3.1/P3.2 requiere revisión antes de P3.3.
 
 ## Funcionalidades todavía no implementadas
 
@@ -81,10 +96,21 @@ Generación Next.js, templates corporativa/business-platform, módulos, Better A
 
 ## Pasos recomendados hacia v0.2
 
-1. Corregir las dos regresiones P2, completar recuperación/importación pendientes y validar Docker local con revisión humana. Mantener P3 detenido hasta cierre P2; el brief concreto sigue pendiente.
+1. Revisar P3.1/P3.2 y resolver selección/procedencia de assets, recursos ausentes, Inter y contenido antes de P3.3. Mantener las limitaciones P2 aceptadas y no publicar sin resolver Git/procedencia cuando corresponda.
 2. Recuperar el repositorio Git real y resolver procedencia antes de publicar.
 3. Implementar corporate-site con manifest, versiones y build/tests independientes de la fábrica.
 4. Continuar business-platform y módulos con consumidor real, luego mantenimiento; integrar IA solo donde aporte valor.
 5. Preparar entrega únicamente cuando exista producto validado, respetando los gates humanos del plan.
 
 Esta entrega se detiene para revisión de lo construido y resolución de precondiciones. No se declara completado MIGRATION_PLAN.md ni se solicita volver a aprobar la autorización general ya concedida.
+
+## Normalización y contratos P3
+
+Factory: nexonova-factory. Fuente autorizada: nexonova-prototype (raíz hermana configurada relativamente). Producto futuro: nexonova-website, todavía inexistente. Los 99 archivos de la fuente conservan sus hashes. Sin cambios en el prototipo, dependencias nuevas ni contratos P2. Preparación válida no implica material aprobado: --require-ready bloquea correctamente. Evidencia final en [P3_VALIDATION.json](docs/migration/P3_VALIDATION.json).
+
+
+## Cierre P3.1/P3.2 — 2026-09-11
+
+133 pruebas aprobadas con Docker habilitado; estructura, imports, enlaces y CLI validados; cero contenedores temporales restantes. Los 99 archivos coinciden con el snapshot preservado. Se corrigió una carrera de confirmación de limpieza del executor sin relajar restricciones ni tests; política docker-unittest.v3, tres regresiones nuevas. Fallo inicial y resultado final preservados en [el registro P3](docs/migration/P3.md).
+
+P3.1/P3.2 completas para revisión; P3 sigue parcial. Ambos pilotos validan sus contratos y fuentes. Material/procedencia, recursos ausentes, tipografía y contenido siguen pendientes. No existe nexonova-website ni se ha iniciado P3.3/P4–P7. Se requiere revisión humana antes de continuar.

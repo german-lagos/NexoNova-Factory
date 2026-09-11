@@ -1,122 +1,176 @@
-# P2 — Validación final local
+# P2 — Corrección y validación final local
 
-Fecha: 2026-09-08. **Estado de P2: FAIL.**
+Fecha: 2026-09-09 (pruebas Docker entre el 9 de septiembre local y el 10 en UTC). **Estado de P2: PASS_WITH_LIMITATIONS.**
 
-La validación detectó dos incumplimientos reproducibles, además de la imposibilidad de probar Docker. La suite completa termina con **71 passed, 2 failed** (73 casos, código 1). No se promueve P2 ni se inicia P3. La falta de Docker por sí sola sería un bloqueo; los defectos comprobados justifican FAIL como único estado global.
+Los criterios técnicos obligatorios de P2 cuentan ahora con pruebas locales, incluidas pruebas reales del executor en Docker. Resultado final: **105 passed**, sin skips ni xfails en la ejecución con Docker habilitado. No se detectó un defecto del runtime que incumpla los criterios ensayados. La aprobación humana de arquitectura/seguridad sigue pendiente y este dictamen técnico no habilita P3.
 
-## Alcance y cambios
+Las limitaciones restantes son operativas y del modelo de amenaza: después de un crash abrupto la recuperación cierra metadata sin repetir herramientas, pero exige inspección/limpieza explícita; la redacción es heurística; se ha validado una sola combinación de host/imagen y la salida de unittest no certifica pruebas maliciosas. No se exige ni se atribuye captura de SIGKILL o recuperación automática de procesos. Por esas limitaciones se utiliza PASS_WITH_LIMITATIONS, no PASS. No quedan precondiciones técnicas externas que bloqueen los escenarios obligatorios ensayados.
 
-Se revisaron AGENTS.md, los documentos de arquitectura aprobados, MIGRATION_PLAN.md, REFACTOR_REPORT.md y las implementaciones/tests de P2. Se añadieron 15 casos en `tests/test_p2_validation.py`. No se modificaron tests anteriores, código runtime, configuración, secretos, dependencias ni infraestructura. No se movieron ni eliminaron archivos. Documentos actualizados: este registro, P2.md, el índice de migración y REFACTOR_REPORT.md. Los registros anteriores de 58 pruebas siguen siendo evidencia histórica, no el resultado vigente.
+## Historial y alcance
 
-Se mantuvieron los dos tests de regresión como fallos ordinarios: sin xfail, skip ni aserciones relajadas. Corregir la implementación queda como siguiente trabajo de P2, fuera de esta entrega limitada a validación.
+El 2026-09-08 la suite terminó con 71 passed y 2 failed: redacción parcial de un secreto sintético con espacios y SIGINT sin cierre. Ese FAIL era correcto para aquel estado. La presente revisión sustituye el dictamen anterior con evidencia nueva; no convierte las pruebas host en pruebas Docker.
 
-## Entorno y comandos ejecutados
+En la corrección previa se modificaron `factory/executor.py` y `factory/cli.py`. Creados: `factory/execution_scope.py`, `factory/state_transfer.py`, `tests/test_p2_fixes.py`, `tests/test_p2_state.py`. Actualizados: este documento, P2.md, índice de migración, REFACTOR_REPORT.md y guías de arquitectura/mantenimiento de P2. No se movieron ni eliminaron fuentes/legado. No se añadieron dependencias, servicios, secretos, templates ni módulos web. En esta validación Docker se añadieron tests/test_p2_docker.py y los registros P2_DOCKER_RESULTS.json/P2_DOCKER_EVENTS.json; se fijó python_image en config/factory.json. No se modificó el runtime, las restricciones ni las regresiones anteriores. Se sincronizaron las referencias de estado P2 en README.md y las guías de arquitectura, seguridad, mantenimiento e índice de migración.
 
-Desde la raíz del repositorio, con el entorno Python `.venv` existente, sin instalar paquetes:
+## P2-V01: redacción
+
+El runtime consume el valor completo delimitado por comillas simples/dobles, incluyendo espacios, escapes, saltos de línea y colas sin cerrar por truncamiento. Mantiene filtrado de valores simples, bearer y claves privadas. La redacción ocurre antes de persistir ToolResult y checkpoint; los errores no incluyen el valor detectado.
+
+Pruebas: regresión original sobre log persistido; nueve variantes de valores; proceso real cuya salida excede el límite y corta un valor entre comillas; evidencia parcial bajo SIGINT sin el secreto sintético. Solo se emplearon datos sintéticos.
+
+**Sigue siendo una defensa heurística, no una garantía absoluta de eliminación de secretos.** No reconoce cualquier codificación, lenguaje, nombre de campo o secreto arbitrario. Una credencial nunca debe introducirse deliberadamente en fuentes/salida confiando en este filtro. Los tests no certifican ausencia universal de fugas.
+
+## P2-V02: interrupción y limpieza
+
+`_execute` conserva la salida parcial ya capturada, la redacta, intenta terminar/recolectar el proceso y limpiar su contenedor por nombre, y propaga `ExecutionInterrupted`, derivada de KeyboardInterrupt, con el resultado parcial. `run` persiste ToolResult y estado terminal antes de volver a propagar la interrupción. CLI devuelve **130** y un diagnóstico fijo. No se oculta KeyboardInterrupt como éxito.
+
+Contrato compatible: `status=error` con `termination=interrupted`, `signal=SIGINT` y `reason=interrupted` (puede incluir una advertencia de limpieza). Se distingue del éxito (`complete`), del fallo ordinario y del timeout (`reason=timeout`). `exit_code` conserva el retorno observado del proceso hijo; el código CLI 130 representa la señal recibida por la fábrica, no el código del hijo. `lifecycle=finished` y referencia relativa `tool-result.json` quedan persistidos.
+
+La prueba real de SIGINT usa un driver aislado y un hijo de confianza: verifica CLI 130, evidencia pública parcial, ausencia del secreto sintético, PID del hijo inexistente, HOME temporal eliminado y staging vacío. La regresión original también pasa sin cambios. La validación Docker posterior confirma código CLI 130, resultado terminal, evidencia parcial redactada, proceso hijo terminado, directorio HOME temporal eliminado y contenedor ausente.
+
+Se estudió SIGTERM: no se instala un handler global en el paquete embebible para cambiar señales de aplicaciones anfitrionas. SIGTERM no tiene cierre inmediato garantizado; corresponde a la recuperación explícita posterior de runs abandonados. **No se implementa ni se atribuye soporte de captura de SIGKILL.** Señales repetidas durante persistencia/limpieza, caída del SO o fallo de disco pueden impedir el cierre inmediato; la recuperación conserva incertidumbre y exige inspección. El test de recuperación usa una salida abrupta real con `os._exit`, no demuestra manejo de todas las señales ni cortes eléctricos.
+
+## Pendientes internos implementados: decisión respecto al plan
+
+### Punto 5: restricciones WorkOrder
+
+Son obligatorias en P2. Se reutiliza WORK_ORDER_SCHEMA y se ofrece `--work-order` en approve-tool y run-tool; el objeto se copia, valida y vincula entero al hash de política/aprobación. El adaptador acepta únicamente work_type=test y salida tool-result.json. No implementa órdenes de generación.
+
+- El alcance usa rutas relativas exactas o directorios; `.` significa todo el workspace. Sin globs. Si el workspace contiene archivos fuera de include o dentro de exclude, se rechaza la operación completa antes del proceso; no se amplía el montaje ni se omiten exclusiones silenciosamente.
+- Inputs no autorizados, ausentes, externos o con hash distinto bloquean. Rutas y enlaces siguen sujetos a safe_path.
+- dry_run del WorkOrder obliga a preview; latencia efectiva es el mínimo entre política global y WorkOrder. No hay retries automáticos, por lo que max_retries no puede habilitarlos.
+- no_web=false o sandbox_required=false jamás relajan red desactivada/Docker obligatorio. Aprobación del operador siempre requerida. Los límites de coste se validan; no hay proveedor de modelos ni llamadas facturables, y model_usage sigue not_applicable.
+- El uso directo sin WorkOrder sigue siendo la API manual del operador, con política global y aprobación obligatorias; no se transforma una orden inválida en llamada manual. Una futura integración del harness debe pasar la orden explícitamente.
+
+### Punto 6: checkpoints y cierre recuperable
+
+Es obligatorio en P2; no exige reiniciar automáticamente efectos desconocidos. El checkpoint `nexonova.checkpoint.v1` se escribe atómicamente antes de preparar/lanzar el proceso y se actualiza con evidencia parcial redactada. Contiene fase, policy_hash, nombre de contenedor y staging relativo. Cada run mantiene su propio checkpoint; no se sobrescribe evidencia de otros ciclos.
+
+`recover-run` adquiere el lock del proyecto. Si ToolResult ya quedó persistido pero faltó actualizar state, conserva sus bytes y completa el cierre. Si no existe resultado terminal, recupera evidencia del checkpoint y registra error/interrupted con executed desconocido y cleanup=operator_inspection_required. No ejecuta procesos ni consume otra aprobación. Un segundo recovery es idempotente. El operador debe inspeccionar los recursos identificados antes de autorizar un nuevo run.
+
+Pruebas: salida abrupta real después de checkpoint, recuperación idempotente, error inyectado entre persistencia de resultado y estado, ausencia de replay, respeto al lock y rechazo de run_id externo. No se promete reanudación de una herramienta a mitad de ejecución, limpieza Docker tras crash ni durabilidad frente a todo fallo físico.
+
+### Punto 10: referencias versionadas al legado
+
+Es obligatorio en P2; el plan permite referencias, no obliga a copiar contenido. `import-legacy-reference` crea un manifiesto privado `nexonova.legacy-reference.v1` con nombres relativos y hashes, sin copiar textos/JSON legados ni sus rutas absolutas internas. Los claims del legado quedan marcados unverified_legacy_claims. No se modifica su contenido ni se importan aprobaciones antiguas como autorizaciones.
+
+`resolve_reference` recibe explícitamente la raíz fuente, valida versión/hash de árbol y archivos, y permite resolver la misma referencia contra una copia trasladada. Rechaza referencias externas, enlaces y fuentes cambiadas; la inspección rechaza nombres de archivos de credenciales y aplica presupuestos. La fuente debe conservarse por separado: una referencia no es un backup.
+
+Además de fixtures, se importó/resolvió una referencia al `project/` real en un almacén temporal: **128 archivos**, hash del original sin cambios. El almacén temporal se descartó al terminar; no se eligió una nueva ubicación definitiva para datos del usuario. El importador queda disponible para esa operación posterior explícita.
+
+## Entorno Docker e imagen
+
+- Cliente y servidor Docker: **29.8.0**, cliente build **88096ef**.
+- Host informado por daemon: Ubuntu 26.04.1 LTS, kernel 7.0.0-31-generic, x86_64; cgroup v2, driver systemd; AppArmor, seccomp y cgroup namespaces disponibles.
+- Socket: **unix:///var/run/docker.sock**, el mismo que fuerza el executor. El sandbox de la sesión denegó inicialmente acceso; los comandos y tests Docker se ejecutaron fuera de ese sandbox con aprobación explícita. No se usaron contextos ni daemon remotos, ni se modificaron permisos del socket.
+- Docker Compose **v5.5.1**, consultado solo para inventario: no es necesario para este adaptador de un contenedor.
+- Imagen oficial seleccionada durante preparación: **python:3.12-slim**, Python **3.12.14** según metadata de la imagen.
+- Referencia fijada en config/factory.json: **python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea**.
+- image ID informado: sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea. Se verificó presencia local por digest antes de ejecutar.
+- Variables incorporadas revisadas: PATH, LANG=C.UTF-8, GPG_KEY (huella pública, no clave privada), PYTHON_VERSION y PYTHON_SHA256. El runtime añade HOME=/tmp y PYTHONDONTWRITEBYTECODE=1; Docker añade HOSTNAME. La prueba comprueba que no aparezcan variables adicionales ni la variable privada sintética del operador.
+
+El digest fija los bytes; no equivale a auditoría de vulnerabilidades ni a aprobación de producción. La imagen queda local para reproducir pruebas. Cada ejecución sigue requiriendo aprobación vinculada a configuración/contenido. Las aprobaciones anteriores a este cambio de configuración no son válidas.
+
+## Preparación, comandos y resultados
+
+Preparación separada de la ejecución restringida:
 
 ```bash
-command -v docker
-ls -l /var/run/docker.sock .venv/bin/python
-python3 -c 'import shutil,pathlib,json; print(json.dumps({"docker_binary":shutil.which("docker"),"local_socket_exists":pathlib.Path("/var/run/docker.sock").exists(),"rootless_socket_exists":pathlib.Path("/run/user/"+str(__import__("os").getuid())+"/docker.sock").exists()}))'
 docker --version
-PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider
-PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests/test_p2_validation.py -q -p no:cacheprovider
-PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider --tb=short
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate_repository.py
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m factory.cli --help
+docker --host unix:///var/run/docker.sock info --format '{{json .ServerVersion}}'
+ls -l /var/run/docker.sock
+docker --host unix:///var/run/docker.sock image ls --digests --format '{{.Repository}} {{.Tag}} {{.Digest}}'
+docker --host unix:///var/run/docker.sock info --format 'server={{.ServerVersion}} os={{.OperatingSystem}} kernel={{.KernelVersion}} arch={{.Architecture}} cgroup={{.CgroupVersion}} driver={{.CgroupDriver}} security={{json .SecurityOptions}}'
+docker compose version
+docker --host unix:///var/run/docker.sock pull python:3.12-slim
+docker --host unix:///var/run/docker.sock image inspect python@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea --format '{{json .RepoDigests}} {{.Id}} {{json .Config.Env}}'
 ```
 
-Resultados:
+El pull se invocó desde Python subprocess con HOME y DOCKER_CONFIG en TemporaryDirectory vacío y PATH=/usr/bin:/bin, sin credenciales. El primer intento falló porque el DNS del daemon no resolvió registry-1.docker.io. El segundo funcionó sin cambiar DNS ni servicios. Esa descarga fue la única preparación de imagen; todos los docker run del executor conservaron **--pull=never**, **--network=none**, sin puertos, sin --privileged y sin filesystem host completo.
 
-- Docker: ejecutable `null`, socket local y socket rootless convencional inexistentes. `docker --version`: `command not found`, código 127. No se puede consultar un daemon operativo desde este entorno. El adaptador solo admite `/var/run/docker.sock`; no se buscaron servicios remotos ni credenciales. No se instaló Docker ni se arrancó un servicio.
-- `config/factory.json`: `python_image=null`; tampoco hay imagen por digest configurada y aprobada. No se intentó descargar imágenes.
-- Suite anterior: **58 passed en 1.43 s**, código 0.
-- Primera ampliación, antes de añadir éxito unittest real y comprobación de PID tras timeout: **11 passed, 2 failed en 0.51 s**, código 1.
-- Suite completa ampliada: **71 passed, 2 failed en 2.89 s**, código 1.
-- Validador de estructura/imports/enlaces y hashes protegidos: `structural_validation=complete`, código 0. CLI `--help`: inicia y devuelve código 0.
+Pruebas finales desde la raíz del repositorio, con acceso autorizado al socket local:
 
-Los procesos de prueba son Python local de confianza, con datos sintéticos en temporales de pytest. El helper `host_adapter` sustituye deliberadamente descubrimiento/comando Docker por Python local; conserva aprobación, snapshot, lector y persistencia reales. `/usr/bin/true` sustituye únicamente la llamada de limpieza: **no demuestra que se cree o elimine un contenedor**. Esto solo existe en tests; no introduce un fallback en producción. stdout y stderr se capturan combinados por diseño.
+```bash
+NEXONOVA_TEST_DOCKER=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests/test_p2_docker.py -q -p no:cacheprovider --tb=short
+PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests/test_p2_validation.py -q -p no:cacheprovider
+PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests/test_p2_fixes.py tests/test_p2_state.py -q -p no:cacheprovider
+NEXONOVA_TEST_DOCKER=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -q -p no:cacheprovider --tb=short
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate_repository.py
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m factory.cli --help
+docker --host unix:///var/run/docker.sock ps -a --filter name=nexonova-test- --format '{{.ID}} {{.Names}} {{.Status}}'
+```
 
-## Fallos reproducidos
-
-### P2-V01 — Redacción incompleta de secretos con espacios
-
-`test_quoted_secret_with_spaces_is_fully_redacted_in_logs` inicia un proceso real que imprime un valor sintético entre comillas, con dos palabras, bajo la clave JSON `password`. Inspecciona el `tool-result.json` realmente persistido. La segunda palabra sobrevive: el patrón de `redact` termina al primer espacio. El caso de una palabra sí pasa. No se utilizaron credenciales reales.
-
-Impacto: incumple la aceptación de logs sin secretos sintéticos; la redacción actual no debe tratarse como frontera suficiente. Corrección propuesta: tratar valores delimitados completos y escapes antes del patrón simple; cubrir delimitadores, valores multilínea y truncamiento por presupuesto sin reintroducir el secreto en diagnósticos. Incluso corregido, el filtrado seguirá siendo heurístico y exigirá revisión de seguridad.
-
-### P2-V02 — SIGINT deja una ejecución abierta
-
-`test_sigint_leaves_recoverable_finished_run` lanza un driver Python aislado. Su hijo envía SIGINT al driver y espera; no se envían señales al proceso pytest. `_execute` entra en su `finally`, pero `KeyboardInterrupt` atraviesa `run`, que solo captura OSError/ValueError. El driver termina con error; el workspace permanece intacto y staging se limpia, pero `state.json` conserva `lifecycle=running` y falta `tool-result.json`.
-
-Impacto: no existe cierre recuperable para esta interrupción normal. Corrección propuesta: definir y persistir un resultado terminal de interrupción, conservar evidencia parcial ya redactada y restaurar la semántica de salida/señal; verificar limpieza real en Docker. SIGTERM, SIGKILL y recuperación tras caída requieren pruebas separadas. No se equipara una escritura atómica con recuperación de un job.
-
-## Matriz de capacidades y evidencia
-
-PASS en esta tabla se limita a la comprobación indicada, nunca al aislamiento completo.
-
-| Capacidad | Resultado | Evidencia y límite |
-|---|---|---|
-| Docker local operativo | BLOCKED | Binario y socket ausentes; imagen no configurada |
-| Ejecución real del executor en contenedor | NOT_EXECUTED | Depende de Docker y digest aprobado; cero contenedores lanzados |
-| Workspace aislado del host y metadata | NOT_EXECUTED | Se revisó argv/montaje; no se verificó contención del kernel |
-| Traversal, rutas externas y symlinks | PASS, API local | Tests anteriores de rutas/enlaces y nuevos intentos reales de escritura denegados; directorio externo sin cambios. No acredita resistencia a carreras de un atacante host |
-| Hardlinks y sustitución de directorio runs | PASS, API local | Rechazo con enlaces reales y ausencia de escritura externa |
-| cwd y entorno permitidos | PASS, proceso host | Proceso observa workspace y PATH/HOME/DOCKER_CONFIG controlados; variable sintética del operador ausente. Python puede añadir LC_CTYPE. cwd/env del contenedor: NOT_EXECUTED |
-| Timeout y límite de salida | PASS, proceso host | Timeout real; PID del hijo ya no existe; duración menor a 5 s para límite de 1 s. Salida acotada en test anterior. Timeout/recursos de contenedor: NOT_EXECUTED |
-| Códigos de salida y stdout/stderr | PASS, proceso host | Código 7 conservado, stdout JSON y stderr visibles en stream combinado; ToolResult persistido. Unittest real: código 0 y un test ejecutado |
-| Herramienta ausente | PASS, control local | Docker ausente no habilita fallback; ejecutable inexistente real devuelve error persistido y limpia staging. Python ausente dentro de imagen: NOT_EXECUTED |
-| Fallo de proceso | PASS, proceso host | Código 7 produce error, no complete |
-| Interrupción SIGINT | FAIL | P2-V02; estado abierto sin resultado terminal |
-| SIGTERM, SIGKILL, caída del daemon y reinicio | NOT_EXECUTED | Sin prueba específica de recuperación; daemon no disponible |
-| Limpieza de temporales host | PASS, casos probados | Staging vacío tras error de arranque, fallo y SIGINT; HOME temporal desaparece tras finalización ordinaria |
-| Limpieza de contenedores en éxito/error/timeout/interrupción | NOT_EXECUTED | El sustituto `/usr/bin/true` no acredita limpieza Docker |
-| Dry-run | PASS | Popen prohibido por test, hash de producto intacto y aprobación sin consumir; genera metadata local autorizada |
-| Separación cliente A / B | PASS parcial, API | Escritura y aprobación cruzadas rechazadas. Lectura/escritura desde contenedor de A hacia B: NOT_EXECUTED. Ambos almacenes comparten usuario host; no hay aislamiento frente a esa cuenta |
-| Aprobación antes de proceso | PASS | Nuevos guards hacen fallar el test si Popen arranca con aprobación ausente o de otro cliente |
-| Cambio de contenido/alcance/política | PASS | Cambiar archivo o policy_hash impide cualquier proceso. Tests previos cubren acción distinta, caducidad y uso único |
-| Logs sin secretos sintéticos | FAIL | Valor simple redactado en log real; valor entre comillas con espacios filtra sufijo (P2-V01) |
-| Escritor único y evidencia | PASS acotado | Un segundo proceso real no adquiere lock ni crea run; lock reutilizable al salir. UUID/snapshots anteriores verificados por suite |
-| Atomicidad | PASS acotado | Fallo inyectado en os.replace conserva estado anterior y limpia temporal; corte eléctrico/SIGKILL durante escritura: NOT_EXECUTED |
-| Red, CPU, memoria, pids, readonly, usuario y capabilities Docker | NOT_EXECUTED | Flags revisados; enforcement necesita contenedor real |
-
-## Calidad de los tests existentes
-
-- Los tests de `safe_path`, symlinks/hardlinks y reemplazo de runs usan filesystem real, no solo valores inventados. Se añadieron intentos de escritura por `ProjectStore.write` para comprobar efectos.
-- Las pruebas de aprobación anteriores verificaban excepciones/estados; los nuevos guards de Popen acreditan ausencia de ejecución para las variantes ensayadas. No autentican a una persona frente a otro proceso con la misma cuenta host.
-- El test anterior de lock usaba dos context managers en un proceso; el nuevo caso compite desde un segundo proceso real. No prueba todos los sistemas de archivos ni escritores que ignoren flock.
-- Los tests de argv Docker verifican intención de configuración. Los de subprocess anteriores verifican lector, límites y redacción simple: ninguno prueba Docker.
-- Se añadió unittest real exitoso y proceso fallido con evidencia persistida. La interpretación de `Ran ... / OK` sigue dependiendo de texto que código no confiable puede falsificar; un resultado complete no certifica calidad ni integridad de los tests.
-- El test anterior de atomicidad inyecta fallo en os.replace; no representa todas las caídas posibles. Los tests de snapshots sí comprueban preservación de evidencia anterior.
-- La redacción simple daba cobertura insuficiente; la regresión nueva demuestra una fuga. No había cobertura SIGINT; ahora demuestra falta de cierre.
-
-## Criterios de P2, punto por punto
-
-Correspondencia con los diez puntos de trabajo y la salida de MIGRATION_PLAN.md:
-
-| Punto | Evaluación |
+| Comprobación | Resultado final |
 |---|---|
-| 1. Configuración validada y contexto explícito | Comprobado para JSON y cliente/proyecto del adaptador existente; configuración inválida rechazada |
-| 2. Separación código, metadata, secretos y estado | Raíz externa y escrituras acotadas comprobadas; separación efectiva del proceso no confiable BLOCKED por Docker. Fuga en diagnóstico FAIL |
-| 3. Executor, rutas, cwd/env, tiempo, red y recursos reales | Controles host parcialmente comprobados; contención Docker NOT_EXECUTED. No satisface el punto completo |
-| 4. Permisos previos y dry-run con raíz autorizada | Comprobado en API actual, sin efectos de proceso en rechazos; no generalizable a herramientas futuras |
-| 5. Aprobaciones vinculadas y restricciones de WorkOrder | Acción/contenido/policy/cliente/caducidad/uso único comprobados. No hay integración completa de restricciones WorkOrder con el adaptador; revisión humana pendiente |
-| 6. Estado por run, atomicidad, escritor, evidencia y recuperación | Lock real y persistencia ordinaria comprobados; cierre SIGINT FAIL; reanudación/checkpoints operativos siguen pendientes |
-| 7. Memoria desactivada y sin escritura implícita | Comprobado por tests y configuración; no se activa memoria automática |
-| 8. Fuentes explícitas y hashes de texto consumido | Comprobado por tests de contexto/integridad; sin DB vectorial ni caché nueva |
-| 9. Límites tiempo/llamadas/consumo | Tests de presupuestos, timeout y salida pasan para el contrato disponible. Recursos Docker NOT_EXECUTED; proveedor de modelos no existe, consumo declarado no aplicable |
-| 10. Importador versionado de legado y referencias portables | NOT_EXECUTED: importador aún no implementado; original preservado según hashes. No confundir conservación con migración validada |
-| Salida: entorno controlado para herramientas reales/productos | No cumplida: dos fallos reproducidos, Docker bloqueado y cierre recuperable/importación pendientes |
-| Revisión obligatoria arquitectura/seguridad | Pendiente de revisión humana; esta validación no concede aprobación |
+| tests/test_p2_docker.py | 10 passed, 9.60 s |
+| tests/test_p2_validation.py | 15 passed, 1.50 s |
+| tests/test_p2_fixes.py + tests/test_p2_state.py | 22 passed, 0.62 s |
+| Suite completa, Docker incluido | 105 passed, 12.37 s; código 0; cero skips/xfails |
+| Estructura/imports/hashes/enlaces/config | structural_validation=complete, código 0 |
+| CLI --help | Inicia, código 0 |
+| Contenedores nexonova-test-* restantes | 0 |
+| Directorios /tmp/nexonova-docker-client-* restantes | 0 |
 
-La aceptación adicional «dos runs simultáneos no mezclan archivos» tiene evidencia de exclusión del segundo escritor y IDs separados, no de dos herramientas concurrentes en Docker. Lectura cruzada A/B y contención efectiva permanecen sin verificar. No se reinterpretan esos criterios para aprobar P2.
+Los tests Docker son opt-in para no usar el daemon implícitamente en una suite local ordinaria. Sin NEXONOVA_TEST_DOCKER=1 se marcan NOT_EXECUTED mediante skip; **la ejecución reportada sí estableció esa variable y ejecutó todos los casos**.
 
-## Riesgos pendientes y revisión humana
+## Escenarios reales, contenedores y limpieza
 
-1. Corregir P2-V01 y P2-V02 y repetir toda la suite sin relajar sus regresiones.
-2. Disponer de un host local de pruebas con Docker operativo e imagen Python oficial revisada, fijada por digest y disponible localmente. Mantener `--pull=never`, sin red, sin credenciales y sin puertos publicados.
-3. Ejecutar pruebas reales de montaje readonly, lectura/escritura cruzada A/B, rutas/symlinks, cwd/env, recursos/red, herramienta ausente y limpieza por nombre tras éxito/error/timeout/interrupción. Inspeccionar que no queden contenedores temporales. Actualmente todas estas comprobaciones Docker están NOT_EXECUTED.
-4. Acordar recuperación/checkpoints e importación versionada del legado, sin modificar sus bytes. Son pendientes del plan, no nuevas fases.
-5. Revisar límites del modelo de amenaza: cuenta host/daemon confiables, carreras de filesystem, redacción heurística, aprobación no criptográfica y salida de tests potencialmente falsificable. La revisión debe decidir cuándo puede habilitarse código no confiable.
+Los tests usan exclusivamente clientes A/B sintéticos fuera del checkout. No sustituyen command, Popen ni el transporte del executor. Los nombres y resultados por escenario se conservan en [P2_DOCKER_RESULTS.json](P2_DOCKER_RESULTS.json), y los eventos sanitizados del daemon en [P2_DOCKER_EVENTS.json](P2_DOCKER_EVENTS.json).
 
-No se modificaron secretos, servicios ni políticas para obtener un resultado favorable. No hubo despliegues. P3–P7 permanecen detenidas; se entrega este diagnóstico para revisión humana.
+Se crearon **30 contenedores** entre diagnóstico y repeticiones finales. Para los 30 existe evento create y destroy; ninguno quedó listado al final. La captura de eventos usa docker events sobre el socket local, desde 2026-09-10T02:35:00Z hasta la hora de cierre, filtra type=container y conserva únicamente atributos mínimos de nombres nexonova-test-*. El registro de resultados incluye las 24 ejecuciones de contenedor de las cuatro iteraciones totalmente aprobadas; los eventos incluyen también los seis del primer diagnóstico.
+
+- **Éxito/aislamiento:** unittest real termina 0 y complete, con un test ejecutado; se valida salida, estado terminal, staging vacío y contenedor ausente.
+- **Fallo ordinario:** unittest falla con código 1; conserva diagnóstico y error, elimina staging/contenedor.
+- **Timeout:** proceso duerme 30 segundos y excede presupuesto de 3 segundos. ToolResult conserva reason=timeout, exit_code=-9 del cliente terminado; estado final finished y contenedor ausente.
+- **Límite de salida:** salida superior al máximo produce error/output_limit y limpieza. En algunas iteraciones el intento rm encontró el contenedor ya eliminado por --rm: el runtime mantuvo la advertencia conservadora de inspección. La inspección posterior confirmó ausencia; no se eliminó ni silenció esa advertencia.
+- **SIGINT:** se interrumpe la CLI solo cuando el checkpoint demuestra que el contenedor ya emitió evidencia. Código 130, termination=interrupted, signal=SIGINT, evidencia pública retenida y sufijo sintético privado ausente. Se verifica desaparición del PID del cliente Docker, del proceso del contenedor, HOME temporal, staging y contenedor.
+- **Crash controlado:** SIGKILL termina solamente el driver de prueba. Queda el contenedor esperado; recover-run cierra metadata con executed desconocido y operator_inspection_required. El mismo ID y StartedAt siguen presentes y no aparece otro run: no hay replay. Se elimina explícitamente **ese** contenedor con rm -f, su staging y HOME de cliente, y se comprueba que los procesos terminaron. No se promete captura de SIGKILL ni limpieza automática tras él.
+- **Rutas/enlaces:** cuatro casos adicionales comprueban traversal, ruta absoluta, symlink y hardlink hacia el cliente B; se rechazan antes del contenedor y no se consume aprobación ni cambia el sentinel B. Se compara el inventario de contenedores antes/después.
+
+La primera ejecución tuvo un fallo de la nueva fixture: sustituyó un marcador también dentro del nombre de una variable y produjo Python inválido. Se corrigió la fixture, sin tocar runtime ni políticas. El resto de aquella ejecución pasó. Dos directorios vacíos del cliente Docker quedaron tras los primeros ensayos de crash; se identificaron por nombre y hora, se eliminaron con rmdir y se amplió la prueba para comprobar/limpiar también ese recurso. Todas las iteraciones posteriores pasan con esa comprobación. No se hizo prune ni se eliminaron imágenes, redes o recursos ajenos; no se crearon volúmenes persistentes ni redes/puertos de prueba.
+
+## Controles demostrados y no demostrados
+
+| Capacidad | Evidencia actual |
+|---|---|
+| Creación real y montaje | Executor sin mocks; container inspect y eventos create/start/die/destroy; un único bind a /workspace, readonly |
+| Escritura autorizada | Escritura/lectura real en /tmp funciona; /workspace, /etc, /root y rutas privadas rechazan escritura |
+| cwd y rutas | /workspace exacto; intento real /workspace/../forbidden denegado; API rechaza traversal/absolutas/enlaces |
+| Cliente A/B | Proceso A no lee ni escribe sentinels de workspace, runs o approvals B; hash del árbol B intacto |
+| Entorno | Solo variables revisadas de imagen/runtime/Docker; variable sintética privada ausente |
+| Red | Solo interfaz lo; conexión a dirección de documentación 192.0.2.1:9 rechazada localmente, sin contactar un servidor; NetworkMode=none |
+| CPU/memoria/PIDs | HostConfig y cgroup v2 dentro del contenedor: cuota CPU equivalente a 1 CPU, memory.max=536870912, pids.max=64 |
+| Archivos/noexec | RLIMIT_FSIZE=(10485760,10485760); escritura que excede 10 MiB falla realmente; ejecutar archivo creado en /tmp falla PermissionError |
+| Usuario/capabilities | UID/GID del operador coinciden; CapEff=0, NoNewPrivs=1, Seccomp=2; Privileged=false y CapDrop=ALL |
+| Éxito, fallo, timeout, salida excesiva | Resultados y limpieza reales verificados |
+| SIGINT y recuperación tras crash | Evidencia, estado/códigos, ausencia de replay y limpieza comprobados según escenario |
+| Dry-run/WorkOrder/aprobaciones | Suite existente: rechazo antes de Popen, cambios de alcance invalidan aprobación, sin efectos en producto |
+| Atomicidad, lock, memoria, contexto, referencias | Suite existente pasa; no se reconstruyeron claims ni se alteró el legado |
+
+No se ejecutaron pruebas de estrés para provocar OOM, saturación de PIDs o medir throttling de CPU: se verificaron los límites instalados en el kernel, además de HostConfig, no benchmarking de esos mecanismos. No se certifica resistencia a vulnerabilidades del kernel/daemon, otras arquitecturas o imágenes. No se hizo escaneo de CVEs de la imagen. SIGTERM/cortes eléctricos/reinicio del daemon siguen sin validación específica; no son escenarios de cierre automático prometidos por el MVP. La herramienta ausente conserva cobertura host y bloqueo sin fallback; no se preparó otra imagen deliberadamente rota. Estas limitaciones no sustituyen ni contradicen el requisito P2 de aplicar límites/red/aislamiento al adaptador actual.
+
+## Reevaluación literal de P2
+
+| Punto del plan | Evaluación técnica |
+|---|---|
+| 1. Configuración JSON y contexto explícito | Cumplido: validación, cliente/proyecto y digest explícitos |
+| 2. Separar código/metadata/secretos/estado | Cumplido en modelo host confiable: snapshot único, B inaccesible, metadata fuera del bind, env privado no heredado; redacción sintética pasa |
+| 3. Executor y contención real | Cumplido: pruebas Docker reales de montaje, rutas, cwd/env, red, usuario/capabilities y límites de kernel |
+| 4. Permisos, dry-run y raíces autorizadas | Cumplido para el adaptador disponible; no se inicia proceso con autorización inválida ni se altera producto en preview |
+| 5. Aprobaciones y restricciones WorkOrder | Cumplido: acción/contenido/política/orden/cliente vinculados, caducidad/uso único y restricciones que no amplían permisos |
+| 6. Atomicidad, escritor, UUID, evidencia y recuperación | Cumplido para cierre recuperable: estado ordinario/SIGINT, checkpoint y crash real sin replay; inspección/limpieza manual tras crash explícita |
+| 7. Memoria sin escrituras implícitas | Cumplido: desactivada y cubierta por suite |
+| 8. Fuentes explícitas y hashes consumidos | Cumplido por tests de contexto/integridad; sin DB/caché nueva |
+| 9. Tiempo/llamadas/consumo según contrato | Cumplido: presupuestos host/WorkOrder, timeout real, límites Docker; modelo no aplicable, sin consumo inventado |
+| 10. Referencias versionadas y bytes originales | Cumplido: importador/resolve, portabilidad/hash y preservación del legado ya probados; ubicación definitiva de archivo bajo decisión del operador |
+| Salida: entorno controlado para herramientas reales/productos | Evidencia suficiente para el executor de pruebas P2; no afirma que exista generación P3 |
+| Revisión humana obligatoria arquitectura/seguridad | PENDIENTE antes de habilitar generación asistida o procesos no confiables; no se concede mediante tests |
+
+La clasificación describe aceptación **técnica con limitaciones**, no aprobación humana ni autorización para continuar. Los controles de cliente no resisten a un atacante con la misma cuenta host o acceso al daemon; ambos permanecen fuera del modelo de amenaza. Las aprobaciones/manifiestos no están firmados y la salida textual de unittest puede falsificarse por código malicioso: revisar también qué prueban los tests. Retención/backup y reanudación automática siguen como evolución operativa.
+
+**P2: PASS_WITH_LIMITATIONS.** Se detiene después de esta validación para revisión humana. P3–P7 no se iniciaron; no hubo despliegues ni cambios de infraestructura externa.
+
+
+## Aprobación posterior — 2026-09-11
+
+El usuario aprobó P2 PASS_WITH_LIMITATIONS y autorizó la preparación P3. Las menciones anteriores de aprobación pendiente son históricas. La validación del renombrado detectó una carrera de limpieza Docker, corregida y documentada en [P3.md](P3.md). Suite actual: 133 aprobadas, incluidas las pruebas Docker originales intactas. Política actual docker-unittest.v3; límites operativos y prohibición de producción permanecen.

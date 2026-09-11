@@ -1,0 +1,912 @@
+{
+  "format": "nexonova.source-manifest.v1",
+  "source_id": "nexonova-prototype",
+  "authorization": "User authorized read-only prototype incorporation and P3.1/P3.2 in this conversation; not an asset license grant.",
+  "tree_hash": "sha256:23a023c684d919d0c33ce6af34401136673ba32afd89a435c775db054cfe222c",
+  "entries": [
+    {
+      "path": ".github/prompts/vista-hablar-con-ventas.prompt.md",
+      "sha256": "sha256:bb6e04a9448a34b8942a19eef78e8fabffacbcbc758f042f5bda5bd427b7b3f1",
+      "bytes": 6324,
+      "action": "KEEP",
+      "approval": "approved",
+      "target": "",
+      "reason": "Preserve source decision evidence; not authoritative commercial content or global policy"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:8cadad567992d78a9d79e849f327e465b620304ca4ac9cab77ad3e75c42aa688",
+      "bytes": 172,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "No approval inferred from presence in prototype"
+    },
+    {
+      "path": ".vercelignore",
+      "sha256": "sha256:8d28fe37e9367efb8ee27e80394821cc672319552fcdb827561605d70d23075a",
+      "bytes": 76,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "sha256": "sha256:41b053a69f57d282624ccccbc44ef195ee13770e7037cf59f22cffc9c749f422",
+      "bytes": 40,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Editor/generated typing artifact is not reusable product source"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "sha256:15c6c365a8d69c4236284354f68ed64909aa94c9da446055c3ba3e7b6df16d66",
+      "bytes": 4959,
+      "action": "KEEP",
+      "approval": "approved",
+      "target": "",
+      "reason": "Preserve source decision evidence; not authoritative commercial content or global policy"
+    },
+    {
+      "path": "IMG_1290.HEIC",
+      "sha256": "sha256:361d2dd1e8c833839bea37403c9ae244a8dda448e07f577b126e9c93bdd910c1",
+      "bytes": 2229983,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "LEEME.md",
+      "sha256": "sha256:0b5818fe00d2a66e631b79119c780914ffe5af0e6ba530ac07dbc5dcc38fa265",
+      "bytes": 2783,
+      "action": "KEEP",
+      "approval": "approved",
+      "target": "",
+      "reason": "Preserve source decision evidence; not authoritative commercial content or global policy"
+    },
+    {
+      "path": "README.md",
+      "sha256": "sha256:4bbe103f2bf9da0b0a9dd4b61ba61a609475a2fee75edc263bfe3c959a1f9c97",
+      "bytes": 4557,
+      "action": "KEEP",
+      "approval": "approved",
+      "target": "",
+      "reason": "Preserve source decision evidence; not authoritative commercial content or global policy"
+    },
+    {
+      "path": "app/api/chat/route.ts",
+      "sha256": "sha256:5b345fa8791f4c09cecb954eabb4159d04f958e4ead6569e8248b1bd99e3a422",
+      "bytes": 4586,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "app/api/domains/check/route.ts",
+      "sha256": "sha256:78e2f90c86170381f940208bf9febdaa0afdd14af728aa121ac61f07135b71d4",
+      "bytes": 4764,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "design/CHATBOT.md",
+      "sha256": "sha256:d86bd64acd89d4195fef7128e784c960713d31c6170cae9354845de5c9f4be5f",
+      "bytes": 2746,
+      "action": "KEEP",
+      "approval": "approved",
+      "target": "",
+      "reason": "Preserve source decision evidence; not authoritative commercial content or global policy"
+    },
+    {
+      "path": "design/propuestas/calidad-v2/LEEME.md",
+      "sha256": "sha256:2634c282b709b0f2cfb099d82d66367fc24f6272f7a75a08d7fa8e335f314e82",
+      "bytes": 5303,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "design/propuestas/calidad-v2/dominio-v2.png",
+      "sha256": "sha256:de287a3e0ef164ca2e103be5f4c2ace26aee98927a759fae5994cad46afa58aa",
+      "bytes": 872522,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "design/propuestas/calidad-v2/propiedad-v2.png",
+      "sha256": "sha256:7f1e4cb9d1f6d106eef7cc869f33dd32c535e0eca5e683c6f2ef930069cf3c62",
+      "bytes": 813417,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "design/propuestas/calidad-v2/responsive-v2.png",
+      "sha256": "sha256:bf8efebcec01e6b70e7ae38c42219e2c5d699e71825ffe2a3fde50f184409f88",
+      "bytes": 745065,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "lib/domains/nic-cl.ts",
+      "sha256": "sha256:a55644549189631111bb9dec6f16dc2e001648d98bd9db3d9f106e2900d12ae1",
+      "bytes": 4067,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "lib/domains/types.ts",
+      "sha256": "sha256:f04e60c63255b4b8c69f46f637b308baf96e4c1a1b48181feb9011658ae9cf60",
+      "bytes": 838,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "lib/domains/verisign-com.ts",
+      "sha256": "sha256:b40b7e5c292a54591efebe042b5e8b92d081d1b488e12d2ce953d860524180af",
+      "bytes": 2718,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "middleware.ts",
+      "sha256": "sha256:cf06be28bfba177d5fc8d701cf46888ed3e1d68e662715308e27ffa8a6137d9b",
+      "bytes": 494,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    },
+    {
+      "path": "next-env.d.ts",
+      "sha256": "sha256:1ffc39a43ec993b6c84cbb0d26abac412368ee4acb367b5801019869d2023b9d",
+      "bytes": 261,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Editor/generated typing artifact is not reusable product source"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "sha256:fcc5106b70a0c22f417402e541141b817bc374af06a2aad48eeaa2b4ac30edf4",
+      "bytes": 125,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Compatible stack reference; future web-tool configuration requires validation"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "sha256:e529361fe342fa4575c9a39f16e008249c9ec581dcbff1e5cd7d82276e7abfb3",
+      "bytes": 33695,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Compatible stack reference; future web-tool configuration requires validation"
+    },
+    {
+      "path": "package.json",
+      "sha256": "sha256:0a947b09756f2c850eef742cca9b95cd4dace44c58aeb3edf4a918adf0aecd88",
+      "bytes": 476,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Compatible stack reference; future web-tool configuration requires validation"
+    },
+    {
+      "path": "public/assets/IMG_1290.jpg",
+      "sha256": "sha256:61aa23ffe7e9a34cd58d24d33d848fddb05db477e787f9c1af82d7de6023fcac",
+      "bytes": 2750754,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/bandera-chile.jpg",
+      "sha256": "sha256:6ddd8fcf5d5b43d6a9836104fc41fd188d8fdfa64f3555855877769413ab5a90",
+      "bytes": 817360,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-domain-v2.png",
+      "sha256": "sha256:de287a3e0ef164ca2e103be5f4c2ace26aee98927a759fae5994cad46afa58aa",
+      "bytes": 872522,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-domain.jpg",
+      "sha256": "sha256:c40cff18d1c26df2e84da625f42f48f779aa185ed7952c14f313ca750a8d6413",
+      "bytes": 347181,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-ownership-v2.png",
+      "sha256": "sha256:7f1e4cb9d1f6d106eef7cc869f33dd32c535e0eca5e683c6f2ef930069cf3c62",
+      "bytes": 813417,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-ownership.jpg",
+      "sha256": "sha256:0a30699d0dba1de0d682301ae22e6dd1aca198bd6e2c06ea26ca358dd0435627",
+      "bytes": 318419,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-responsive-v2.png",
+      "sha256": "sha256:bf8efebcec01e6b70e7ae38c42219e2c5d699e71825ffe2a3fde50f184409f88",
+      "bytes": 745065,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-responsive.jpg",
+      "sha256": "sha256:2424f6055e73c0da97cd45d8acf9d053726e4ec7f8f4094fd1e4b49769fbf500",
+      "bytes": 403685,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon-speed.jpg",
+      "sha256": "sha256:669e57b522ab48445b474c307a9f4e8d048c360309df56a74b73bd26cb6ef385",
+      "bytes": 233593,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/icon.png",
+      "sha256": "sha256:450c52b123abd056de583f9ccddb5497cd4c4178be982c1b0e84834ed2a97daa",
+      "bytes": 77807,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/logo-footer-subtitle.png",
+      "sha256": "sha256:db4bf2ac5b4d67774c50de8ec0cfb642cc768b6309f257bfd344e2bdad475599",
+      "bytes": 68986,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/logo-footer.png",
+      "sha256": "sha256:58c29845794563733e598a1f6c8f80630830cc693c0ef95ee3d7dbbf055354ed",
+      "bytes": 50897,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/logo-header.jpeg",
+      "sha256": "sha256:2008bf82d5ae4e268fc772d11a877ba9170dbe6871ba7a5fbc1a04f747b83774",
+      "bytes": 82164,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/logo-hero-subtitle.png",
+      "sha256": "sha256:55e59b3e35a623d1f2cf023aea6c268abcb83e1861f92beaf5e96271544a882a",
+      "bytes": 162328,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/logo-url.png",
+      "sha256": "sha256:0b9a42cfb67a983a17cf7c81048421b3a14134facefdcdab980015d07042f581",
+      "bytes": 214460,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/process-icons-set.jpg",
+      "sha256": "sha256:3d34a7d06cb677f874faa21cc3d23ca5226d38a588e56ee060d9ea319dcb0f00",
+      "bytes": 148615,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/quality-icons-set.jpg",
+      "sha256": "sha256:c7881953b390cf9de7cfc0cda1f6d3ee5abec4fd8daf2434b5b852d2911dbbd3",
+      "bytes": 378410,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/brand/social.jpeg",
+      "sha256": "sha256:ada1ec4f434cd7f772d4b511e9eeb9b23e4e56483f893883f3c8bc6f0fc8e627",
+      "bytes": 250593,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/chile-map.png",
+      "sha256": "sha256:9da673b313ee628b2717cb9634fc43b2f0daa3258688b9cf3d965dbbd86ff1b5",
+      "bytes": 575673,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/chile-map.svg",
+      "sha256": "sha256:e280ad658b63942aaca50b3f4ed31b9294984e22089d460d8ba8fcd08f3475cd",
+      "bytes": 3426,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/datacenter-corp.jpg",
+      "sha256": "sha256:2d3a319039c43aa9a8f4c13e37551b6ac9d957414818ffde3029595634ed4370",
+      "bytes": 883271,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/gsap-3.15.0.min.js",
+      "sha256": "sha256:92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "bytes": 72927,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "No demonstrated active consumer; no dependency carried into P3"
+    },
+    {
+      "path": "public/assets/hero-afro-entrepreneur-v1.png",
+      "sha256": "sha256:b05ebeee1c065cd85e28046f3dae64f7254d94ea280a133e1aac2a88c636539e",
+      "bytes": 1907935,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-barrio-pyme-oleo-v2.png",
+      "sha256": "sha256:07884c2f0440e0d3c2a7da61ebee9bfe370560e7f0d1c34014da09b8fad53a0a",
+      "bytes": 3353152,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/coquimbo-1920.webp",
+      "sha256": "sha256:76975058543c42e8a6e21ac802307c8270028f620988b95726dcd929db90f2cf",
+      "bytes": 414290,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/coquimbo-3840.webp",
+      "sha256": "sha256:bd85a55c64c72ef8f406dfea10d96cf8165fcd26e859de32f44d6a1c930458f6",
+      "bytes": 1407154,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/coquimbo.jpg",
+      "sha256": "sha256:5c347c5976ac947bf068568aa59f6db9ff8702cb4e358c3b404e6e46d42d6298",
+      "bytes": 302641,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/creditos.html",
+      "sha256": "sha256:850569f73f42a0a73f8294fe515f46729f121abe9707a05b8c9ccfaefc9306c9",
+      "bytes": 2832,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/los-angeles-1920.webp",
+      "sha256": "sha256:63085adfe00ca3ffc16b5e3ae8f2cb99b0e3ba93892d706a9aa8e8e6c64f346f",
+      "bytes": 160002,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/los-angeles-3840.webp",
+      "sha256": "sha256:35ef2ca2e3e7186324fad3b70935aca20c1709deb727594d42fd3ad95aca939b",
+      "bytes": 524388,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/los-angeles.jpg",
+      "sha256": "sha256:4443057c948ba9b2333c39c4677a0fbc9ae7fb6689f20cf5ef84c8248dade109",
+      "bytes": 221469,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/temuco-1920.webp",
+      "sha256": "sha256:0b524d530df1054df295f5b33ff119139e2128d2141ceb3b1a58d4b5731aa295",
+      "bytes": 567504,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/temuco-3840.webp",
+      "sha256": "sha256:4376bad5aa8e189bed68d8027dba2426ddebeb009db5748cf120824a52383208",
+      "bytes": 1601370,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-cities/temuco.jpg",
+      "sha256": "sha256:3fb286bacf42b1e872c27d37a00b90b25b7d09ad1dccdbf0f647813d29b8fa82",
+      "bytes": 311194,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-devices-desktop-poster-v1.jpg",
+      "sha256": "sha256:4bc5261f5b68edfca16715817e18299bf24ffc5ae5c846eeda1574435032d96d",
+      "bytes": 41890,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-devices-mobile-poster-v1.jpg",
+      "sha256": "sha256:ed681787e04958d41849864d0d7059723ce7c58a3127e66f828b5872e1b66d2a",
+      "bytes": 33715,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-entrada-pyme-v3.png",
+      "sha256": "sha256:8cd692179e745e996668e729f475b3916bb446a0412d79b59ef21bca2d2dc8c8",
+      "bytes": 2378293,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-mockup-macbook-poster-v1.jpg",
+      "sha256": "sha256:26504f548658539d04acc612182025816d6cae1253e93f38481a264e5a8b8a76",
+      "bytes": 46757,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-mockup-mobile-poster-v1.jpg",
+      "sha256": "sha256:968260d53ea6ef3ece1fad66455768c3ce6d95651c209bbbb90c4260f6826064",
+      "bytes": 32385,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-office-pyme-v1.png",
+      "sha256": "sha256:0c5f7f56f512e7563caf1b3037a14624d90355519962d863d854cc664c3c7b6a",
+      "bytes": 2229956,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-pyme-ssl-v1.png",
+      "sha256": "sha256:aebf4ba34127a9ec83870806304c6241b0a164fffcdc7e71dc9595714cdfc2ae",
+      "bytes": 667942,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/hero-pymes-nexonova-v4.png",
+      "sha256": "sha256:5e511497e4ec19235d08ad6cb932d69aca440bf9731840c7bc27a3da09b5289b",
+      "bytes": 1817419,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/illust-domain-search.jpg",
+      "sha256": "sha256:189d95d22dbd914971fdd862828c3230185b3b353fbe8daf75b825bcd3652059",
+      "bytes": 85964,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/illust-growth-support.jpg",
+      "sha256": "sha256:ba8e0a6589a8cf750da891c259114a312309c0e57c99d4e1a3d639a037d6e8ae",
+      "bytes": 261697,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/illust-pyme-store.jpg",
+      "sha256": "sha256:f12fff245eaa8209d6eb3db84a3908c4bdc58be2f2315481d4a11d690ed7a78b",
+      "bytes": 104295,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/loader-macbook-front-v1.png",
+      "sha256": "sha256:10bbad8a4b1578ed2388761b45f653473594f24de58c5138e0b1e58666c83d94",
+      "bytes": 60679,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/loader-macbook-open-v1.png",
+      "sha256": "sha256:3a2bfd878d26d2dad0c1ef05bb5919cd916442423c63b475371ed9eae213a91c",
+      "bytes": 34744,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/loader-phone-angle-v1.png",
+      "sha256": "sha256:65301d00576204e8bc05e5e94e88f7aa50518ba8efba3973e23b645f13e7f879",
+      "bytes": 105827,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/loader-phone-front-v1.png",
+      "sha256": "sha256:ffbe604a754550a74c40d8386e5707e333f7d25c7a2fe331505973020e71d781",
+      "bytes": 88896,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/nexonova-sales.jpg",
+      "sha256": "sha256:d5ffdb5cc2513dcd5905d636d6cb119a7eb9a856590ff49b7dae95acd3079c97",
+      "bytes": 688451,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/payments/mercado-pago.svg",
+      "sha256": "sha256:91eebaceaf93eeddf67b3a157b3fb9e2d0f741f2ca69ff4d8bb131a7e43aa6d4",
+      "bytes": 13558,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/payments/transbank.svg",
+      "sha256": "sha256:82db327e85a63770f35c71fdea6df21bafbb59411ab6e8034b422a64e9ba7eb2",
+      "bytes": 12562,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/assets/payments/webpay.svg",
+      "sha256": "sha256:5de6035368d2bb54549dc2ea86d792f3d6128ed3d3a4eff0bf68bf71603938b8",
+      "bytes": 396252,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "Asset provenance and final selection require human review"
+    },
+    {
+      "path": "public/bento-services.css",
+      "sha256": "sha256:6c812fa01601e8b9648b83220461d2b277fe8a3cbddd73e5aa872e4ba173664d",
+      "bytes": 19065,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "src/components/Services.module.css",
+      "reason": "Extract approved visual rules/tokens into CSS Modules; do not copy historical cascade wholesale"
+    },
+    {
+      "path": "public/bento-services.js",
+      "sha256": "sha256:f07b48a58f22ad99613e0b40a454ba1196a4b8db7a008b4b7ca0bbc35141da84",
+      "bytes": 7154,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/chat.css",
+      "sha256": "sha256:cb3393dc16e81c2d928fddb815b8e416955a27a726ee35da99e174f28ca3ba8b",
+      "bytes": 3739,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/chat.js",
+      "sha256": "sha256:9ff032da882d13ac3e8d76ce889a0043912ba3899b00a67384cb7194f9d8d9cb",
+      "bytes": 4634,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "src/components/DemoChat.tsx",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/contact-banner.css",
+      "sha256": "sha256:c42ed4bc35f07c81e1f6d884189953a2c81764099cdd01f9cccd98f5c3ba20c4",
+      "bytes": 3155,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "src/components/Contact.module.css",
+      "reason": "Extract approved visual rules/tokens into CSS Modules; do not copy historical cascade wholesale"
+    },
+    {
+      "path": "public/desarrollo-web.html",
+      "sha256": "sha256:e1dd9185bc41166d6614630656a6b458c0c6cb30b65763adcfd4e19b93b6f8d7",
+      "bytes": 13048,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "Approved selective reconstruction; visual/content reference, not automatic copy"
+    },
+    {
+      "path": "public/index.html",
+      "sha256": "sha256:2936cacb3bb3eac7c99572484505926187fa7bf4b2036fb2b50684b4cc3d4bbd",
+      "bytes": 63233,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "src/app/page.tsx",
+      "reason": "Approved selective reconstruction; visual/content reference, not automatic copy"
+    },
+    {
+      "path": "public/landing-shop.js",
+      "sha256": "sha256:2d1fa14f3db5b7e378e088076574126c5fb56c560df07c1a8293ec9c80a0a682",
+      "bytes": 16102,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "src/components/Inquiry.tsx",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/landing.config.js",
+      "sha256": "sha256:c4b7124abedee638a549a87f5f938c8fd940ea2abc2832c9f41f5c6b63d74c7b",
+      "bytes": 842,
+      "action": "REVIEW",
+      "approval": "pending",
+      "target": "",
+      "reason": "No approval inferred from presence in prototype"
+    },
+    {
+      "path": "public/landing.css",
+      "sha256": "sha256:9fb4b63e5517c82620a9c3a8f7640106fca7da37e7195f11c78a9acb913a1291",
+      "bytes": 87344,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "src/styles/tokens.css",
+      "reason": "Extract approved visual rules/tokens into CSS Modules; do not copy historical cascade wholesale"
+    },
+    {
+      "path": "public/landing.js",
+      "sha256": "sha256:13b6515000fba2e0ee5cacca7ad970e342ee4a16a1cbb27a4a9f6489c501cec7",
+      "bytes": 6967,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/lib/storefront.js",
+      "sha256": "sha256:543cf885a92fbba947e53b6212d9fe180538c194aaf5509b12a469b604c534a5",
+      "bytes": 4856,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "src/lib/domain-format.ts",
+      "reason": "Only pure domain-format helpers are candidates; checkout and persistence are excluded"
+    },
+    {
+      "path": "public/pricing-agentcard.css",
+      "sha256": "sha256:aeca2a229232cdaca512b1939e84926d19c39cd44524d6ba726921e90961ee9d",
+      "bytes": 9312,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "src/components/Plans.module.css",
+      "reason": "Extract approved visual rules/tokens into CSS Modules; do not copy historical cascade wholesale"
+    },
+    {
+      "path": "public/scroll-animations.js",
+      "sha256": "sha256:0b6bb8077f218a19cd5244a5a4b348ffc08bacd818c47e48202c50990036f7e1",
+      "bytes": 982,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/site-connect.js",
+      "sha256": "sha256:85521c7f99ff76298e6e91b682d3139f6366b9d29a4a45ffa4b680947fd98ef9",
+      "bytes": 1181,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "React local demonstration behavior; no direct DOM coupling or remote services"
+    },
+    {
+      "path": "public/ventas.html",
+      "sha256": "sha256:a97f019cbd6c4316f512d6721bb6255a4dc747a1c4c1c10572f4ba6a19c5c3d1",
+      "bytes": 19563,
+      "action": "REBUILD",
+      "approval": "approved",
+      "target": "",
+      "reason": "Approved selective reconstruction; visual/content reference, not automatic copy"
+    },
+    {
+      "path": "tests/build.test.mjs",
+      "sha256": "sha256:2e4141b272353af6f452191c0ae844fdb8ffb06d96fff5bd769c15fa2e3fa3df",
+      "bytes": 1551,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Extract useful acceptance intent; do not assume historical assertions match current UI"
+    },
+    {
+      "path": "tests/chat.test.mjs",
+      "sha256": "sha256:fb74a28e3cbe70556551752fe3486372aeb6c51b0ef60dec4a6d120d268b9785",
+      "bytes": 2954,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Extract useful acceptance intent; do not assume historical assertions match current UI"
+    },
+    {
+      "path": "tests/domains.test.mjs",
+      "sha256": "sha256:c4af6984b31bb50697c20b99a39878deb8b8d28f014b9a553f115c17ab226624",
+      "bytes": 1047,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Extract useful acceptance intent; do not assume historical assertions match current UI"
+    },
+    {
+      "path": "tests/hero.test.mjs",
+      "sha256": "sha256:5e52af57e81f055b1f84cb8e1380c4ece41eef8ff9764ce104386d5143dcf599",
+      "bytes": 8647,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Extract useful acceptance intent; do not assume historical assertions match current UI"
+    },
+    {
+      "path": "tests/quality.test.mjs",
+      "sha256": "sha256:c354436d98cc9ae8a24a132e0c9ea4eda8e61122107752439d2662f4e4cf7489",
+      "bytes": 3259,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Extract useful acceptance intent; do not assume historical assertions match current UI"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "sha256:73ed2d13a8b079d420adc30a1e570468ee41f6de0bb10ea9282fe91f66aea4c0",
+      "bytes": 719,
+      "action": "ADAPT",
+      "approval": "approved",
+      "target": "",
+      "reason": "Compatible stack reference; future web-tool configuration requires validation"
+    },
+    {
+      "path": "vercel.json",
+      "sha256": "sha256:4154b1e14983648d2d9929c7788ac0b181b05374d5552a174b40d355f13d1600",
+      "bytes": 463,
+      "action": "DROP",
+      "approval": "not_selected",
+      "target": "",
+      "reason": "Remote integrations or prototype deployment architecture excluded from P3"
+    }
+  ],
+  "missing": [
+    "public/service-values.css",
+    "public/web-development.css",
+    "public/assets/promo-cocker.jpg",
+    "public/assets/rocket-editorial-v3.png",
+    "public/assets/contact-specialist-v1.png"
+  ],
+  "pending_decisions": [
+    "Select exact logo/hero/icon assets and substantiate provenance; no shared assets approved by inference.",
+    "Decide recover/replace/remove for missing referenced resources.",
+    "Approve local Inter distribution and license evidence.",
+    "Approve final editorial content; commercial values remain provisional."
+  ]
+}

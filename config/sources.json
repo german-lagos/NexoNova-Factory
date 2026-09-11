@@ -1,0 +1,15 @@
+{
+  "format": "nexonova.source-registry.v1",
+  "sources": {
+    "nexonova-prototype": {
+      "relative_to_factory": "../nexonova-prototype",
+      "access": "read-only",
+      "expected_tree_hash": "sha256:23a023c684d919d0c33ce6af34401136673ba32afd89a435c775db054cfe222c"
+    },
+    "synthetic-brief": {
+      "relative_to_factory": "tests/fixtures/p3-source",
+      "access": "read-only",
+      "expected_tree_hash": "sha256:acec88e61f91b2aa8eab02d003cdb02b4b4814d49e5d281903e57f135968e883"
+    }
+  }
+}

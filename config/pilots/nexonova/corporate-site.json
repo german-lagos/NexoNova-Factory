@@ -1,0 +1,138 @@
+{
+  "format": "nexonova.corporate-site.v0.1.0",
+  "project_id": "nexonova-website",
+  "locale": "es-CL",
+  "route": "/",
+  "source_id": "nexonova-prototype",
+  "brand": {
+    "name": "NexoNova",
+    "colors": {
+      "navy": "#00143f",
+      "blue": "#075dff",
+      "cyan": "#00a4d6"
+    },
+    "font_family": "Inter",
+    "font_approval": "pending"
+  },
+  "sections": [
+    {
+      "id": "header",
+      "title": "Navegación",
+      "enabled": true
+    },
+    {
+      "id": "hero",
+      "title": "Presentación de NexoNova",
+      "enabled": true
+    },
+    {
+      "id": "domains",
+      "title": "Consulta de dominios — demostración",
+      "enabled": true
+    },
+    {
+      "id": "about",
+      "title": "Sobre NexoNova",
+      "enabled": true
+    },
+    {
+      "id": "plans",
+      "title": "Planes de ejemplo",
+      "enabled": true
+    },
+    {
+      "id": "services",
+      "title": "Servicios",
+      "enabled": true
+    },
+    {
+      "id": "faq",
+      "title": "Preguntas frecuentes",
+      "enabled": true
+    },
+    {
+      "id": "contact",
+      "title": "Preparar consulta — no enviada",
+      "enabled": true
+    },
+    {
+      "id": "footer",
+      "title": "Información y créditos",
+      "enabled": true
+    },
+    {
+      "id": "chat",
+      "title": "Asistente de demostración",
+      "enabled": true
+    },
+    {
+      "id": "inquiry",
+      "title": "Tu consulta",
+      "enabled": true
+    }
+  ],
+  "plans": [
+    {
+      "id": "inicio",
+      "name": "Inicio",
+      "price_clp": 4990,
+      "demonstration": "provisional"
+    },
+    {
+      "id": "pyme",
+      "name": "PYME",
+      "price_clp": 8990,
+      "demonstration": "provisional"
+    },
+    {
+      "id": "negocio",
+      "name": "Negocio",
+      "price_clp": 14990,
+      "demonstration": "provisional"
+    }
+  ],
+  "services": [
+    "Landing page",
+    "Tienda online",
+    "Soluciones a medida",
+    "Sitio corporativo"
+  ],
+  "behaviors": {
+    "domains": "local-format-only",
+    "chat": "local-scripted",
+    "inquiry": "interest-summary",
+    "contact": "prepare-copy-not-sent",
+    "persistence": "memory-only",
+    "external_requests": "disabled"
+  },
+  "assets": [
+    {
+      "path": "public/assets/brand/logo-header.jpeg",
+      "role": "header-logo",
+      "approval": "pending"
+    },
+    {
+      "path": "public/assets/brand/logo-footer.png",
+      "role": "footer-logo",
+      "approval": "pending"
+    }
+  ],
+  "pending_decisions": [
+    "Select exact logo/hero/icon assets and substantiate provenance; no shared assets approved by inference.",
+    "Decide recover/replace/remove for missing referenced resources.",
+    "Approve local Inter distribution and license evidence.",
+    "Approve final editorial content; commercial values remain provisional."
+  ],
+  "acceptance": [
+    "Original source hashes unchanged",
+    "Only route /; no independent ventas/desarrollo pages",
+    "No external business-service requests",
+    "Domains never claim availability",
+    "Chat is explicitly local demonstration",
+    "Inquiry never creates an order or sends a message",
+    "Keyboard/mobile/reduced-motion behavior validated",
+    "Build/typecheck/tests required before product acceptance",
+    "Second synthetic configuration has no NexoNova identity leakage",
+    "Independent product without factory runtime or private metadata"
+  ]
+}

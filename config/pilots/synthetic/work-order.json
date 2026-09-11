@@ -1,0 +1,26 @@
+{
+  "format": "nexonova.product-work-order.v1",
+  "work_order_id": "p3-prepare-synthetic",
+  "operation": "prepare-project",
+  "client_id": "synthetic",
+  "project_id": "synthetic-website",
+  "source_id": "synthetic-brief",
+  "spec_hash": "sha256:cfaee6b60ccb6b8c32f0dd4e211d00c9cdecfafe98c9d916351c6b6e04ce5231",
+  "manifest_hash": "sha256:cb06679f52a4195dc05a15eca1dd2c420384b4532a816dc7ea568c5235e23717",
+  "authorization": {
+    "actor": "user",
+    "basis": "Explicit approval of corporate-site v0.1.0, P3 plan and scope restricted to P3.1/P3.2 in this conversation",
+    "allowed_actions": [
+      "snapshot",
+      "validate-contracts"
+    ]
+  },
+  "constraints": {
+    "source_readonly": "required",
+    "external_services": "denied",
+    "max_files": 1000,
+    "max_bytes": 100000000,
+    "generation": "not-authorized",
+    "deployment": "denied"
+  }
+}

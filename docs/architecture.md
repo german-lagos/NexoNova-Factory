@@ -1,6 +1,6 @@
 # Arquitectura implementada — NexoNova Factory 0.1.0 experimental
 
-Fecha: 2026-09-06. Alcance: P0/P1 y preparación parcial de P2. Este documento describe código existente; no presenta TARGET_ARCHITECTURE como implementación terminada.
+Fecha inicial: 2026-09-06. Actualización P2: 2026-09-09. Alcance: P0/P1 y P2 validado técnicamente con limitaciones, pendiente de revisión humana. Este documento describe código existente; no presenta TARGET_ARCHITECTURE como implementación terminada.
 
 ## Límites
 
@@ -18,7 +18,7 @@ El cierre contiene estado real, trazabilidad de ciclos ejecutados, resultado, de
 
 CLI → ProjectStore + FactoryConfig → ToolExecutor → aprobación host vinculada → snapshot filtrado → Docker local → resultado y estado de ejecución.
 
-Solo existe python.unittest. No hay shell libre, pull automático ni proveedor externo. La falta de Docker/imagen produce un bloqueo verificable. El adaptador no ha ejecutado contenedores en esta sesión y no está aprobado para uso con proyectos de clientes.
+Solo existe python.unittest. No hay shell libre, pull automático ni proveedor externo. La falta de Docker/imagen produce un bloqueo verificable. El adaptador se validó con contenedores reales y datos sintéticos; la aprobación humana para uso con proyectos de clientes sigue pendiente.
 
 El snapshot excluye metadata Git y cachés; rechaza archivos de credenciales conocidos, entradas binarias y contenido con señales de secretos. Se comprueba que su hash coincida con el contenido aprobado. Docker recibe ese snapshot de solo lectura, no el workspace original ni aprobaciones/estado. La detección de secretos es heurística y no sustituye una revisión de datos de entrada.
 
@@ -63,12 +63,12 @@ Ningún componente fue movido para ajustar visualmente el árbol. reports se ext
 └── .writer.lock               exclusión de escritor mediante flock
 ```
 
-Los IDs son slugs acotados. Se rechazan rutas no canónicas, escapes, enlaces y archivos especiales. Escrituras atómicas reemplazan el archivo completo con fsync; un lock cooperativo limita a un escritor. No se implementó recuperación/reanudación automática, importador de runs antiguos ni política de retención. Un actor host con la misma cuenta y escritura en toda la raíz puede vulnerar estas fronteras; ese escenario no queda resuelto por comprobaciones de Path.
+Los IDs son slugs acotados. Se rechazan rutas no canónicas, escapes, enlaces y archivos especiales. Escrituras atómicas reemplazan el archivo completo con fsync; un lock cooperativo limita a un escritor. P2 incorpora checkpoints con salida parcial redactada y recuperación explícita de cierre sin repetir herramientas. El importador de referencias versionadas conserva nombres relativos y hashes del legado, sin copiar contenido ni validar sus claims. No hay reanudación automática ni política de retención. WorkOrders de test pueden restringir alcance, entradas, dry-run y latencia sin ampliar permisos globales; su contenido queda vinculado a la aprobación. Un actor host con la misma cuenta y escritura en toda la raíz puede vulnerar estas fronteras; ese escenario no queda resuelto por comprobaciones de Path.
 
 Los snapshots de contexto requieren un directorio de ciclo nuevo. Hashes corresponden al contenido consumido. Fuentes pueden suministrarse explícitamente; la lista académica predeterminada se conserva para compatibilidad sin inventar sus siete archivos faltantes.
 
 ## Estado de seguridad y evolución
 
-Revisión humana pendiente de aislamiento Docker, imágenes, daemon local, recursos, limpieza de contenedores, información sensible y modelo de permisos. Los tests de comandos, control de salida y rutas no acreditan aislamiento del kernel. Consulte [security.md](security.md) y [migration/P2.md](migration/P2.md).
+Pruebas Docker de aislamiento, recursos y limpieza ejecutadas; véase [la validación P2](migration/P2_FINAL_VALIDATION.md). Revisión humana pendiente de imágenes, operación tras crash, información sensible y modelo de permisos. Los tests de comandos, control de salida y rutas no acreditan aislamiento del kernel. Consulte [security.md](security.md) y [migration/P2.md](migration/P2.md).
 
 P3 está detenido hasta recibir el brief concreto y cerrar P2. No existen templates, módulos web, actualización de productos, agentes con IA, CI de producto ni recetas de despliegue. La evolución propuesta permanece en [TARGET_ARCHITECTURE.md](../TARGET_ARCHITECTURE.md) y [MIGRATION_PLAN.md](../MIGRATION_PLAN.md).

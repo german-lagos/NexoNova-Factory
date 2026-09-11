@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "work_order_id",
+    "operation",
+    "client_id",
+    "project_id",
+    "source_id",
+    "spec_hash",
+    "manifest_hash",
+    "authorization",
+    "constraints"
+  ],
+  "properties": {
+    "format": {
+      "type": "string",
+      "enum": [
+        "nexonova.product-work-order.v1"
+      ]
+    },
+    "work_order_id": {
+      "type": "string",
+      "pattern": "[a-z0-9][a-z0-9-]{0,62}"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "prepare-project"
+      ]
+    },
+    "client_id": {
+      "type": "string",
+      "pattern": "[a-z0-9][a-z0-9-]{0,62}"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "[a-z0-9][a-z0-9-]{0,62}"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "[a-z0-9][a-z0-9-]{0,62}"
+    },
+    "spec_hash": {
+      "type": "string",
+      "pattern": "sha256:[a-f0-9]{64}"
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "sha256:[a-f0-9]{64}"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor",
+        "basis",
+        "allowed_actions"
+      ],
+      "properties": {
+        "actor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "allowed_actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "snapshot",
+              "validate-contracts"
+            ]
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_readonly",
+        "external_services",
+        "max_files",
+        "max_bytes",
+        "generation",
+        "deployment"
+      ],
+      "properties": {
+        "source_readonly": {
+          "type": "string",
+          "enum": [
+            "required"
+          ]
+        },
+        "external_services": {
+          "type": "string",
+          "enum": [
+            "denied"
+          ]
+        },
+        "max_files": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "generation": {
+          "type": "string",
+          "enum": [
+            "not-authorized"
+          ]
+        },
+        "deployment": {
+          "type": "string",
+          "enum": [
+            "denied"
+          ]
+        }
+      }
+    }
+  }
+}
